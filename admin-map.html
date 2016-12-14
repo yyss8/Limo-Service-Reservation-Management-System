@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <title>Control Panel Admin Map Section</title>
+    <style>
+
+        hr {
+            position: relative;
+            top: 60px;
+            border: 1px dashed black;
+            border-style: none none dashed; 
+            color: #fff; 
+            background-color: #fff;
+        }
+
+        body{
+            margin:0px;
+            padding:0px;
+        }
+
+        .map{
+            left:0px;
+            top:0px;
+            width:50%;
+            height:950px; 
+            z-index: 1;
+        }
+
+
+        #hNav{
+            top: 40px;
+            float: left;
+            position: absolute;
+            width: 50%;
+            height: 35px;
+            line-height: 32px;
+            margin-right: 5px;
+        }
+
+        #accountField{
+            position:fixed;
+            right:20px;
+            top:10px;
+            color: #F7F7F7;
+        }
+
+        #topMenu{
+            top: 0px;
+            right: 0px;
+            position: fixed;
+            width: 50%;
+            background-color: gray;
+            line-height: 30px;
+            height: 50px;
+            z-index: 1;
+        }
+
+        ul#hNavUl li {
+            display: inline;
+        }
+
+        .hNavBnt{  
+            border: none;
+            background:white;
+            color: #ff8f2b;
+            display: inline-block;
+            width: 110px;
+            height: 35px;
+            text-align: center;
+            margin-right: 5px;
+            cursor: pointer;
+
+        }
+        .hNavBnt:hover{
+            border: none;
+            background:#ff8f2b;
+            color: white;
+            display: inline-block;
+            width: 110px;
+            height: 35px;
+            text-align: center;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .hSelectBnt{
+            border: none;
+            background:#ff8f2b;
+            color: white;
+            display: inline-block;
+            width: 110px;
+            height: 35px;
+            text-align: center;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .bnt{
+            background-color: indianred;
+            border: none;
+            color: white;
+            padding: 6px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 11px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 80px;
+        }
+
+        .bnt:hover{
+            background-color: white;
+            border: none;
+            color: indianred;
+            padding: 6px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 11px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 80px;
+        }
+
+        .arrow{
+            position: absolute;
+            top: 44px;
+            left: 338px;
+            border-color: #fff transparent transparent;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 5px;
+        }
+
+        #infoPanel{
+            position: absolute;
+            top: 100px;
+            width: 50%;
+            right: 0px;
+            height: 850px;
+            background-color: #f5f5f5;
+            
+        }
+
+        #infoPanel select{
+            position: absolute;
+            height: 28px;
+            
+        }
+
+        #infoPanel p{
+            position: absolute;
+        }
+       
+        #mapTooltip{
+            position: absolute;
+            display: none;
+            z-index: 2;
+        }
+
+        #mapTooltip p{
+            color: white;
+            background: indianred;
+        }
+
+        #priceField{
+            position: absolute;
+            width: 100%;
+            top: 200px;
+            left: 10px;
+        }
+
+    </style>
+</head>
+<body onload="divsGetWH()">
+    <div id="map" class="map"></div>
+    <div id="topMenu"><div id="accountField"></div></div>
+    <div id="hNav">
+            <ul id="hNavUl" style="list-style-type:none"> 
+                 <li><a href="/admin"><button class="hNavBnt">Website Info</button></a></li>
+                 <li><a href="/admin-user"><button class="hNavBnt">Users Control</button></a></li>
+                 <li><a href="#"><button class="hSelectBnt">Areas Control<div class="arrow"></div></button></a></li>
+                 <li><a href="/admin-res"><button class="hNavBnt">Reservation</button></a></li>
+            </ul>
+    </div>
+
+    <div id="mapTooltip">
+        <p>Click map to start creating area</p>
+    </div>
+
+    <div id="infoPanel">
+            <h4 style="position:absolute;top:0px;left:7px;">Area Control</h4>
+            <p style="top:40px;left:20px;">Areas:</p>
+            <select id="areaSelect" style="top: 52px;left: 80px;">
+                <option value="none">none</option>
+            </select>
+
+            <button class="bnt" onclick="selectArea()" style="position:absolute;top:49px;left:160px">Select</button>
+            <button class="bnt" onclick="window.location.reload()" style="position:absolute;top:49px;left:255px">Show all</button>
+            <button id="bnt2" class="bnt" onclick="newArea()" style="position:absolute;top:87px;left:160px">New Area</button>
+            <button id="bnt3" class="bnt" onclick="getPoly()" style="position:absolute;top:87px;left:255px">Save Area</button>
+
+            <div id="priceField">
+                <h4>Fare Control</h4>
+                <p style="top:50px;left:20px">All Area Fares Are Calculated Based On </p> 
+                <select style="top:62px;left:335px">
+                    <option value="D">Distances Between Different Places.</option>
+                    <option value="A">Fixed Fare for Different Areas.</option>
+                    <option value="C">Custom Fare Setting For Each Areas.</option>
+                </select>
+                <button id="sysBnt" class="bnt" style="position:absolute;top:59px;left:600px">Apply</button>
+                <hr>
+                <p id="notSelected" style="left:20px;top:120px;color:red">Select A Area To Start Setting The Fare</p>
+                <div method="post" id="fareField" style="display:block;width:100%;z-index:2;">
+                </div> 
+
+            </div>
+    </div>
+
+
+    <script>
+            var zoneNum;
+            var polyList = new Object;
+            var areaCoords = new Array();
+            var map,path,infowindow;
+            var selectedArea;
+            var areaN = {{areas}};
+            var areaList = {%raw areaList%};
+            var priceDict;
+            var _xsrf = getCookie("_xsrf");
+
+            function getCookie(name) {
+                var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+                return r ? r[1] : undefined;
+            }
+
+            function initMap() {
+                directionsService = new google.maps.DirectionsService;
+                directionsDisplay = new google.maps.DirectionsRenderer;
+                map = new google.maps.Map(document.getElementById('map'), {
+                    //initializing google map
+                     center: {lat: 40.740160, lng: -73.983363},
+                     zoom: 12
+                 });
+
+                poly = new google.maps.Polyline({
+                    strokeColor: '#000000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3,
+                    editable: true
+                });
+                infoWindow = new google.maps.InfoWindow;
+                poly.setMap(map);
+                
+            }   
+
+            function addLatLng(event) {
+                //add polylines on map
+                path = poly.getPath();
+                path.push(event.latLng);
+                areaCoords.push(event.latLng);
+            }
+
+            function toolTip(){
+                var tooltip = document.getElementById('mapTooltip');
+                var mapPosition = document.getElementById('map');
+                var getTop = Number(mapPosition.offsetTop) + 100;
+                var getLeft = Number(mapPosition.offsetLeft) + 600;
+                tooltip.style.top = getTop.toString() + "px";
+                tooltip.style.left = getLeft.toString() + "px";
+                tooltip.style.display = "block";
+                
+            }
+
+            function newArea(){
+                // enable new area clicker 
+                map.addListener('click', addLatLng);
+                toolTip();
+            }
+
+
+            function getPoly(){
+                // add area 
+
+                num = areaCoords.length;
+                if (areaCoords[num-1] != areaCoords[0]){
+                    areaCoords.push(areaCoords[0]);
+                }
+                //auto complete area
+                
+                path.clear(); //remove polylines
+                var polygon = new google.maps.Polygon({
+                    paths:areaCoords,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 3,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    editable:true
+                });
+                var areaPath = polygon.getPath();
+                saveArea(areaPath,false);
+                if (areaCoords[0] != undefined){
+                    zoneNum+=1;
+                    var zoneName = "zone" + zoneNum.toString();
+                    polyList[zoneName] = polygon;
+                    areaCoords = new Array();
+                }else{
+                    alert("No Coordinat Data Found!");
+                }
+                createArea();
+                
+            }
+
+            function selectArea(){
+                //select area 
+                
+                var getAreaInfo = new Object;
+                var polyPath = new Array;
+                var select = document.getElementById("areaSelect");
+                var selectedArea = select.options[select.selectedIndex].text;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        getAreaInfo = JSON.parse(xhttp.responseText);
+                        var getX = getAreaInfo["X"].split(",");
+                        var getY = getAreaInfo["Y"].split(",");
+                        for (var i = 0;i < getX.length;i++){
+                            var coord = {
+                                lat:Number(getX[i]),lng:Number(getY[i])
+                            };
+                                    polyPath.push(coord);
+                        };
+                        initMap();
+                        var polygon = new google.maps.Polygon({
+                            paths:polyPath,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 3,
+                            fillColor:'#55EBBE',
+                            fillOpacity: 0.35,
+                            editable:true
+                        });
+  
+                        polygon.setMap(map);
+
+                        if (selectedArea == "none"){
+                            alert("There is no any area at this time, click new area to create a new area zone.");
+                        }else{
+                            var removeButton = document.getElementById("bnt2");
+                            var updateButton = document.getElementById("bnt3");
+                            var notSelectedLabel = document.getElementById("notSelected");
+                            notSelectedLabel.innerHTML = "Fare";
+                            notSelectedLabel.style.left = "295px";
+                            notSelectedLabel.style.color = "black";
+                            removeButton.innerHTML = "Remove";
+                            removeButton.onclick = function(){deleteArea(selectedArea);};
+                            var getPaths = polygon.getPath();
+                            updateButton.onclick = function(){saveArea(getPaths,true);};
+                            getPriceArea(getAreaInfo);
+                        }
+                    }
+                };
+                
+                xhttp.open("post", "admin-map", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=selectArea&areaNum=" + selectedArea.slice(-1));
+                
+            }
+
+            function getArea(){
+                //load area coords
+                if (areaN != "None"){
+                    for (zoneNum = 1;zoneNum <= Number(areaN);zoneNum++){
+                        var polyPath = new Array;
+                        var getX = areaList[zoneNum.toString()][0].split(",");
+                        var getY = areaList[zoneNum.toString()][1].split(",");
+                        for (var i = 0;i < getX.length;i++){
+                            var coord = {
+                                lat:Number(getX[i]),lng:Number(getY[i])
+                            };
+                            polyPath.push(coord);
+                        };
+                        var polygon = new google.maps.Polygon({
+                            paths:polyPath,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 3,
+                            fillColor: '#FF0000',
+                            fillOpacity: 0.35
+                        });
+                        polygon.setMap(map);
+                        createArea();
+                    }
+                }
+            }
+
+            function getPriceArea(areaInfo){
+                var areaSelect = document.getElementById("areaSelect");
+                var areaName = areaSelect.options[areaSelect.selectedIndex].text;
+
+                var div = document.getElementById("priceField");
+                var getTopNumber = 120;
+
+                var getPrice = areaInfo["PRICE"].split(',');
+                var getPriceSetting = areaInfo["SETTING"].split(',');
+
+                if (div.contains(document.getElementsByName("fareInput")[0])){
+                    var spanNum = 0;
+                    for (var i = 1; i<= Number(areaN);i++){
+                        getSpan = document.getElementsByTagName("SPAN")[spanNum];
+                        getSpan.childNodes[0].nodeValue = areaName;
+                        spanNum+=1;
+                        if (getPriceSetting[i-1] == "A"){
+                            document.getElementsByName("settingSelect")[i-1].options.selectedIndex = "1";
+                        }else if (getPriceSetting[i-1] == "D"){
+                            document.getElementsByName("settingSelect")[i-1].options.selectedIndex = "0";
+                        }else if(getPriceSetting[i-1] == undefined){
+                            document.getElementsByName("settingSelect")[i-1].options.selectedIndex = "1";
+                        }
+                        if (getPrice[i-1] == undefined){
+                            document.getElementsByName("fareInput")[i-1].value = 0;
+                        }else{
+                            document.getElementsByName("fareInput")[i-1].value = getPrice[i-1];
+                        }
+                        
+                        
+                    }
+                }else{
+                    for (var i = 1; i<= Number(areaN);i++){
+                        getTopNumber += 50;
+                        var priceField = document.createElement("SPAN");
+                        var inputField = document.createElement("input");
+
+                        var fromArea = document.createTextNode(areaName);
+                        var to = document.createTextNode("  to  ");
+                        var toArea = "Area " + i.toString();
+                        var toAreaField = document.createTextNode(toArea);
+                        var getTop = getTopNumber.toString() + "px";
+                        var getStyle = "position:absolute;top:" + getTop + ";left:20px";
+                        
+                        var select = document.createElement("select");
+                        var option1 = document.createElement("option");
+                        var option2 = document.createElement("option");
+
+                        option1.text = "By Distance";
+                        option2.text = "By Area";
+                        option1.value = "D";
+                        option2.value = "A";
+                        select.appendChild(option1);
+                        select.appendChild(option2);
+                        select.setAttribute("style","position:absolute;top:-2px;left:145px;");
+                        select.setAttribute("name","settingSelect");
+                        if (getPriceSetting[i-1] == "A"){
+                            select.selectedIndex = "1";
+                        }else if (getPriceSetting[i-1] == "D"){
+                            select.selectedIndex = "0";
+                        }else if(getPriceSetting[i-1] == undefined){
+                            select.selectedIndex = "1";
+                        }
+
+                        inputField.setAttribute("type","text");
+                        inputField.setAttribute("name","fareInput");
+                        var getInputStyle = "padding-left:5px;position:absolute;height:19px;width:40px;top:" + getTop + ";left:290px";
+                        inputField.setAttribute("style",getInputStyle);
+
+                        if (getPrice[i-1] == undefined){
+                            inputField.setAttribute("value",0);
+                        }else{
+                            inputField.setAttribute("value",getPrice[i-1]);
+                        }
+
+                        var buttonTop = getTopNumber + 130;
+                        buttonTop = buttonTop.toString() + "px";
+                        var updateButton = document.createElement("button");
+                        updateButton.setAttribute("class",'bnt');
+                        updateButton.setAttribute('style',"position:absolute;height:35px;width:80px;top:" + buttonTop + ";right:50px");
+                        updateButton.setAttribute("onclick",'updatePrice()');
+                        updateButton.innerHTML = "Update Fare"
+
+                        priceField.setAttribute("style",getStyle);
+                        priceField.setAttribute("id",toArea);
+                        priceField.appendChild(fromArea);
+                        priceField.appendChild(to);
+                        priceField.appendChild(toAreaField);
+                        priceField.appendChild(select);
+
+                        div.appendChild(inputField);
+                        div.appendChild(priceField);
+                        
+                    }
+                    var note = document.createElement("SPAN");
+                    note.appendChild(document.createTextNode('Enter Fare Per Mile For "By Distance" Option And Fixed Fare For "By Area" Option.'))
+                    getTopNumber+= 50;
+                    var noteTop = "position:absolute;top:" + getTopNumber.toString() + "px;left:20px;color:red"; 
+                    note.setAttribute("style",noteTop);
+                    div.appendChild(updateButton);
+                    div.appendChild(note);
+                }
+
+            }
+
+
+            function createArea(){
+                //create area select options
+                var select = document.getElementById("areaSelect");
+                var c = document.createElement("option");
+                if (select.options[select.selectedIndex].value == "none"){
+                    select.options.length = 0;
+                }
+                c.text = "Area " + zoneNum.toString(); 
+                c.value = "zone" + zoneNum.toString();
+                select.options.add(c, zoneNum);
+            }
+
+            function saveArea(area,updateArea){
+                // save & update area coords
+                var getX="";
+                var getY = "";
+                var areaNumber,postType;
+                var select = document.getElementById("areaSelect");
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == "ok"){
+                            window.location.reload();
+                            alert("Area Saved");
+                        }
+                    }
+                };
+
+                if (updateArea == false){
+                    postType = "saveAreas"
+                    if (zoneNum == "undefined"){
+                        zoneNum = 1;
+                        areaNumber = zoneNum.toString();
+                    }else{
+                        areaNumber = zoneNum.toString();
+                    }
+                }else if (updateArea == true){
+                    var getAreaCode;
+                    postType = "updateAreas"
+                    if (zoneNum < 10){
+                        getAreaCode = select.options[select.selectedIndex].value.slice(-1);
+                        areaNumber = getAreaCode.toString();
+                    }else if (zoneNum >= 10){
+                        getAreaCode = select.options[select.selectedIndex].value.slice(-2);
+                        areaNumber = getAreaCode.toString();
+                    }
+                }
+                
+                
+                for (var i =0; i < area.getLength(); i++) {
+                    var xy = area.getAt(i);
+                    getX+= xy.lat();
+                    getX+= ",";
+                    getY+= xy.lng();
+                    getY+= ",";
+                }
+
+                xhttp.open("post", "admin-map", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=" + postType + "&areaNum=" + areaNumber + "&xCoord=" + getX.substring(0, getX.length-1) + "&yCoord=" + getY.substring(0, getY.length-1));
+            }
+
+            function deleteArea(areaNum){
+                // delete area coords
+                var getAreaCode;
+                if (zoneNum < 10){
+                    getAreaCode = areaNum.slice(-1);
+                }else if (zoneNum >= 10){
+                    getAreaCode = areaNum.slice(-2);
+                }
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == "ok"){
+                            window.location.reload();
+                            alert("Area Deleted");
+                        }
+                    }
+                };
+                xhttp.open("post", "admin-map", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=deleteAreas&areaNum=" + getAreaCode);
+            }
+
+            function updatePrice(){
+                var areaSelect = document.getElementById("areaSelect");
+                var areaName = areaSelect.options[areaSelect.selectedIndex].text;
+                var fareInput = document.getElementsByName("fareInput");
+                var settingSelect = document.getElementsByName("settingSelect");
+                var getFares,getSetting;
+                var priceToUpdate = "";
+                var settingToUpdate = "";
+
+                for (var i = 0;i < fareInput.length;i++){
+                    getFares = fareInput[i].value + ",";
+                    getSetting = settingSelect[i].options[settingSelect[i].selectedIndex].value + ",";
+                    priceToUpdate += getFares;
+                    settingToUpdate += getSetting;
+                }
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == "ok"){
+                            window.location.reload();
+                            alert("Area Price Updated");
+                        }
+                    }
+                };
+
+                xhttp.open("post", "admin-map", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=updatePrices&areaNum=" + areaName.slice(-1) + "&price=" + priceToUpdate.slice(0,-1) + "&setting=" + settingToUpdate.slice(0,-1));
+
+            }
+
+
+            function getUser(){
+                var accountField = document.getElementById("accountField");
+                var status = "{{status}}";
+                if (status == "ok"){
+                    var username = "{{userName}}";
+                    accountField.innerHTML = "Welcome " + username + "    |    <a href='/'><img src='/static/img/homepage.png' style='width:18px;height:18px'></a>    |    <a href='/cp'><img src='/static/img/cp.ico' style='width:18px;height:18px'></a>     |    <a href='/logout'><img src='/static/img/logout.png' style='width:18px;height:18px'></a>";
+                }else{
+                    alert(status);
+                }
+            }
+
+            function divsGetWH(){
+                var getTop = document.getElementById("topMenu");
+                var mapLeft = Number(getTop.offsetLeft);
+                var hNav = document.getElementById("hNav");
+                var caledLeft = mapLeft;
+                hNav.style.left = caledLeft.toString() + "px";
+                var infoPanel = document.getElementById("infoPanel");
+                infoPanel.style.left = caledLeft.toString() + "px";
+                getUser();
+                getArea();
+            }
+
+
+    </script>
+
+        </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3O0U1rlie1FQ25XPVLllSAuHSUXcwXo&signed_in=true&libraries=places&callback=initMap&language=en-US"
+        async defer></script>
+
+</body>
+
+</html>

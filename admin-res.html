@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Limo System Control Panel</title>
+<style>
+
+
+    html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td{
+        margin: 0;
+        padding: 0;
+    }
+
+    #accountField{
+        position:absolute;
+        right:20px;
+        top:10px;
+        color: #F7F7F7;
+    }
+
+    .bnt{
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }  
+
+    .selecctBnt{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .bnt:hover{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .panelBnt{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 11px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 105px;
+    }
+
+    .panelBnt:hover{
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 11px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 105px;
+    }
+
+    #topMenu{
+        width: 100%;
+        background-color: gray;
+        line-height: 30px;
+        height: 50px;
+    }
+    body{
+        margin:0px;
+        padding:0px;
+    }
+
+    #uNav{        
+        width: 50px;
+        padding-left: 0px;
+    }
+
+    #hNav{
+        position: absolute;
+        width: 700px;
+        height: 35px;
+        line-height: 32px;
+        margin-right: 5px;
+    }
+
+    ul#hNavUl li {
+        display: inline;
+    }
+
+    .mainBody{
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    .f1{
+        width: 210px;
+        height: 50px;
+        font-size: 30px;
+        color: #555;
+        text-align: center;
+    }
+
+    .hNavBnt{  
+        border: none;
+        background:white;
+        color: #ff8f2b;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+
+    }
+    .hNavBnt:hover{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .u_header{
+        height:50px;
+        margin-bottom: 20px;
+        border-bottom: 2px #ebebeb solid;
+    }
+
+    .hSelectBnt{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .arrow{
+        position: absolute;
+        top: 30px;
+        left:420px;
+        border-color: #fff transparent transparent;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px;
+    }
+
+    #infoPanel{
+        position: absolute;
+        width: 1030px;
+        height: 600px;
+        background-color: #f5f5f5;
+        
+    }
+
+    #infoPanel p{
+        position: absolute;
+    }
+
+    #infoPanel input{
+        padding-left:5px;
+        display: block;
+        position: absolute;
+        width: 165px;
+    }
+
+    #infoPanel b{
+        position: absolute;
+    }
+
+    #infoPanel img{
+        position: absolute;
+        height: 15px;
+        width: 15px;
+    }
+
+    #infoPanel select{
+        position: absolute;
+    }
+
+    #resList{
+        position:absolute;
+        overflow-y:scroll;
+        width:317px;
+        height:400px;
+        top:70px;
+        left:50px; 
+        background-color: #FFFFFF;
+        border: 2px solid #73AD21;
+    }
+
+    #resField td{
+        text-align:center;
+        cursor:default;
+    }
+
+    
+    .selectedRes{
+        background-color:#0EABFE;
+        color:white;
+    }
+
+    #resPanel input{
+        position: absolute;
+        top: -1px;
+        left: 110px;
+        height: 18px;
+    }
+
+    #driverPanel{
+        position:absolute;
+        width:520px;
+        height:300px;
+        top:280px;
+        left:430px;
+    }
+
+    #driverField{
+        position: absolute;
+        top:30px;
+        height:160px;
+        width: 230px;
+        overflow-y:scroll;
+        background-color: #FFFFFF;
+        border: 2px solid #73AD21;
+
+    }
+
+    #driverTable td{
+        text-align:center;
+        cursor:default;
+    }
+
+    #driverMap{
+        position:absolute;
+        top:30px;
+        height:270px;
+        width: 330px;
+        left:250px;
+        background-color: #FFFFFF;
+    }
+
+
+</style>
+</head>
+<body>
+    <div id="topMenu"><div id="accountField"></div></div>
+    <div class="mainBody">
+        <div class="u_header">
+            <h1 class="f1">Control Panel</h1>
+        </div>
+        <div id="uNav">
+            <ul style="list-style-type:none"> 
+                <li><a href="/cp"><button class="bnt">Profile</button></a><hr width="140" align="left"></li>
+                <li><a href="http://www.google.com"><button class="bnt">Messages</button></a><hr width="140" align="left"></li>
+                <li><a href="/cp-rl"><button class="bnt">Reservations</button></a><hr width="140" align="left"></li>
+                <li id="admin" style="display:none"><a href="#"><button class="selecctBnt" >ADMIN</button></a></li><hr width="140" align="left"></li>
+            </ul>
+        </div>
+
+        <div id="hNav">
+            <ul id="hNavUl" style="list-style-type:none"> 
+                 <li><a href="/admin"><button class="hNavBnt">Website Info</button></a></li>
+                 <li><a href="/admin-user"><button class="hNavBnt">User Control</button></a></li>
+                 <li><a href="/admin-map"><button class="hNavBnt">Area Control</button></a></li>
+                 <li><a href="#"><button class="hSelectBnt">Reservations<div class="arrow"></div></button></a></li>
+                 
+            </ul>
+        </div>
+
+        <div id="infoPanel">
+            <p style="top:6px;left:50px">Search By:</p>
+            <select id="searchType" style="left:50px;top:30px"> 
+                <option value="I">ID</option>
+                <option value="U">Username</option>
+                <option value="D">Driver #</option>
+                <option value="S">Status</option>
+                <option value="P">Price</option>
+            </select>
+            <button onclick="getResList()" style="position:absolute;top:30px;left:328px">Check</button> 
+            <input type="text" id="infoToFind" placeholder="Enter Information" style="left:140px;top:30px">
+
+            <div id="resList">
+                <table id="resField" width="100%" border="0" cellpadding="5" cellspacing="2" bgcolor="#FFFFFF">
+                    <tbody id="resBody"><tr>
+                        <td id= "title" bgcolor="#ffffff">Order ID</td>
+                        <td id= "title" bgcolor="#ffffff">PickUp Date</td>
+                        <td id= "title" bgcolor="#ffffff">Order Status</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="resPanel">
+                <p style="top:30px;left:600px">Order ID: <b id='IDfield' style="top:0px;left:90px"></b></p>
+                <input id="carNum" style="left:540px;top:280px;width:30px;" disabled> 
+                <p style="top:80px;left:430px">Username: <input type="text" id="username" style="width:130px" disabled></p>
+                <p style="top:80px;left:700px">Status: <select style="top:0px;left:110px;width:140px;" id="status">
+                            <option value="P">Processing</option>
+                            <option value="C">Confirmed</option>
+                            <option value="D">Deleted</option>
+                        </select></p>
+                <p style="top:120px;left:430px">Time: <input type="text" id="time" style="width:130px"></p>
+                <p style="top:120px;left:700px">Date: <input type="text" id="date" style="width:130px"></p>
+                <p style="top:160px;left:430px">Departure: <input type="text" id="dept" style="width:400px"></p>
+                <p style="top:200px;left:430px">Destination: <input type=text" id="dest" style="width:400px"></p>
+                <p style="top:240px;left:430px">Size:                         
+                    <select style="top:0px;left:55px;width:65px;" id="size">
+                            <option value="SD">Sedan</option>
+                            <option value="SUV">SUV</option>
+                            <option value="VN">Minivan</option>
+                        </select></p>
+
+                <p style="top:240px;left:580px">Customer #:
+                        <input type=text" id="custNum" style="width:30px">
+                </p>
+                <p style="top:240px;left:770px">Fare :$<input type=text" id="fare" style="width:60px">
+                </p>
+            </div>
+            <div id="driverPanel">
+                <p>Assign Driver</p>
+                <div id="driverField">
+                    <table id="driverTable" width="100%" border="0" cellpadding="5" cellspacing="2" bgcolor="#FFFFFF">
+                        <tbody id="resBody"><tr>
+                            <td id= "title" bgcolor="#ffffff">Car #</td>
+                            <td id= "title" bgcolor="#ffffff">Size</td>
+                            <td id= "title" bgcolor="#ffffff">Job#</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                
+                <button class="panelBnt" style="position:absolute;top:200px;" onclick="getDrivers('all')">Show All Driver</button>
+                <button class="panelBnt" style="position:absolute;top:200px;left:128px;" onclick="getDrivers('avb')">Available Driver</button>
+                <button id='cancelBnt' class="panelBnt" style="position:absolute;top:230px;display:none" onclick="unassignDr()">Cancel Driver</button>
+                <button class="panelBnt" style="position:absolute;top:260px;" onclick="updateRes()">Update Reservation</button>
+                <button id= "deleteBnt" class="panelBnt" style="position:absolute;top:260px;left:128px;display:none;" onclick="delRes()">Delete Reservation</button>
+                <div id="driverMap"></div>
+            </div>
+
+        </div>
+        
+
+
+
+    </div>
+
+
+<script>
+
+            var map,marker;
+            var resList,driverList;
+            var _xsrf = getCookie("_xsrf");
+            var username = "{{userName}}";
+            var randomLocation = new Object();
+
+            function getCookie(name) {
+                var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+                return r ? r[1] : undefined;
+            }
+
+            function getDrivers(num){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        driverList = JSON.parse(xhttp.responseText);
+                        resetRes();
+                        insertDrivers(driverList);
+                    }
+                };
+                xhttp.open("post", "admin-res", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=getDriver&infoType=" + num);
+            }
+
+            function insertDrivers(dr){
+                var resTable = document.getElementById("driverTable");
+                for (var i = 1;i <= Object.keys(dr).length;i++){
+                    var newRow = resTable.insertRow(-1);
+                    newRow.insertCell(0).innerHTML = dr[i.toString()]["CAR_NUM"];
+                    newRow.insertCell(1).innerHTML = dr[i.toString()]["CAR_SIZE"];
+                    switch (dr[i.toString()]["CURRENTJOB"]){
+                        case 0:
+                            newRow.insertCell(2).innerHTML = "Idle";
+                            randomLocation[dr[i.toString()]["CAR_NUM"]] = addIdleDrMarker(document.getElementById("dept").value);
+                            break;
+                        case 999:
+                            newRow.insertCell(2).innerHTML = "Off";
+                            break;
+                        default:
+                            newRow.insertCell(2).innerHTML = dr[i.toString()]["CURRENTJOB"];
+                            coords = dr[i.toString()]["COORD"];
+                            var img = {
+                                url:"static/img/car2.png",
+                                scaledSize: new google.maps.Size(50, 50)
+                            };
+                            var coordSplit = coords.split(",");
+                            var latLng = new google.maps.LatLng(Number(coordSplit[0]),Number(coordSplit[1]));
+                            var marker = new google.maps.Marker({
+                                position:latLng,
+                                icon:img
+                            });
+                            marker.setMap(map);
+
+                    } 
+                }
+                
+            }
+
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName == "TD" && e.target.id != "title"){
+                    for (var i = 0;i<e.target.parentNode.parentNode.childElementCount;i++){
+                        e.target.parentNode.parentNode.children[i].className = "";
+                    }
+                    e.target.parentNode.className = "selectedRes";
+                    if (e.target.parentNode.children[1].textContent.length <= 3){
+                        document.getElementById("carNum").value = e.target.parentNode.children[0].textContent;
+                    }else{
+                        selectRes(e.target.parentNode.children[0].textContent);
+                    }
+                }
+            });
+
+            function getResList(){
+                var info = document.getElementById("infoToFind").value;
+                var infoType = document.getElementById("searchType").value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        
+                        var table = document.getElementById("resField");
+                        while(table.rows.length > 1) {
+                            table.deleteRow(1);
+                        }
+                        resList = JSON.parse(xhttp.responseText);
+                        insertRes(resList);
+                    }
+                };
+                xhttp.open("post", "admin-res", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=getResult&infoType=" + infoType + "&info=" + info);
+
+            }
+
+            function insertRes(res){
+                var resTable = document.getElementById("resField");
+                for (var i = 1;i <= Object.keys(res).length;i++){
+                    var newRow = resTable.insertRow(-1);
+                    newRow.insertCell(0).innerHTML = res[i.toString()]["ID"];
+                    var date = res[i.toString()]["DATE"].slice(4,6) + "/" + res[i.toString()]["DATE"].slice(6,8) + "/" + res[i.toString()]["DATE"].slice(2,4);
+                    newRow.insertCell(1).innerHTML = date;
+                    if (res[i.toString()]["STATUS"] == "P"){
+                        newRow.insertCell(2).innerHTML = "Processing";
+                    }else if (res[i.toString()]["STATUS"] == "C"){
+                        newRow.insertCell(2).innerHTML = "Confirmed";
+                    }else if (res[i.toString()]["STATUS"] == "D"){
+                        newRow.insertCell(2).innerHTML = "Deleted";
+                    }
+                }
+            }
+
+            function selectRes(id){
+                document.getElementById("IDfield").innerHTML = resList[id]["ID"];
+                document.getElementById("username").value = resList[id]["USERNAME"];
+
+                if (resList[id]["STATUS"] == "P"){
+                    document.getElementById("deleteBnt").style.display = "block";
+                    document.getElementById("status").options.selectedIndex = "0";
+                }else if (resList[id]["STATUS"] == "C"){
+                    document.getElementById("cancelBnt").style.display = "block";
+                    document.getElementById("deleteBnt").style.display = "block";
+                    document.getElementById("status").options.selectedIndex = "1";
+                }else if(resList[id]["STATUS"] == "D"){
+                    document.getElementById("deleteBnt").style.display = "none";
+                    document.getElementById("status").options.selectedIndex = "2";
+                }
+
+                document.getElementById("time").value = resList[id]["TIME"];
+                document.getElementById("date").value = resList[id]["DATE"];
+                document.getElementById("dept").value = resList[id]["DEPT"];
+                document.getElementById("dest").value = resList[id]["DEST"];
+
+                if (resList[id]["SIZE"] == "SD"){
+                    document.getElementById("size").options.selectedIndex = "0";
+                }else if (resList[id]["SIZE"] == "SUV"){
+                    document.getElementById("size").options.selectedIndex = "1";
+                }else if(resList[id]["SIZE"] == "VN"){
+                    document.getElementById("size").options.selectedIndex = "2";
+                }
+
+                document.getElementById("carNum").value = resList[id]["CARNUM"];
+                document.getElementById("custNum").value = resList[id]["CUSTNUM"];
+                document.getElementById("fare").value = resList[id]["FARE"];
+                resetRes();
+
+            }
+
+            function resetRes(){
+                
+                var selectedDr = document.getElementById("carNum").value;
+                var table = document.getElementById("driverTable");
+                destCoords = getDeptCoord(document.getElementById("dept").value);
+                while(table.rows.length > 1) {
+                    table.deleteRow(1);
+                }
+                if (selectedDr == "0"){
+                    initMap(destCoords.lat,destCoords.lng);
+                    var curLatLng = new google.maps.LatLng(Number(destCoords.lat),Number(destCoords.lng));
+                    var curDeptMarker = new google.maps.Marker({
+                        position:curLatLng
+                    });
+                    curDeptMarker.setMap(map);
+                    randomLocation = new Object();
+                }else{
+                    coords = getDriverCoord(selectedDr);
+                    var coordSplit = coords.split(",")
+                    initMap(Number(coordSplit[0]),Number(coordSplit[1]));
+                    addCurDrMarker(coordSplit[0],coordSplit[1],destCoords);
+                }
+
+            }
+
+            function updateRes(){
+                var xhttp = new XMLHttpRequest();
+                var carNum = document.getElementById("carNum").value;   
+                var resID = document.getElementById("IDfield").innerHTML;
+                var status = document.getElementById("status").options[document.getElementById("status").selectedIndex].value;
+                var time = document.getElementById("time").value;
+                var date = document.getElementById("date").value;
+                var dept = document.getElementById("dept").value;
+                var dest = document.getElementById("dest").value;
+                var size = document.getElementById("size").options[document.getElementById("size").selectedIndex].value;
+                var custNum = document.getElementById("custNum").value;
+                var fare = document.getElementById("fare").value;
+                var prevCarNum = resList[resID]["CARNUM"]
+
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == 'ok'){
+                            window.location.reload();
+                            alert("Reservation Info Updated!");
+                        }
+                    }
+                };
+                xhttp.open("post", "admin-res", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                if (carNum != prevCarNum){
+                    if (confirm("Assign Driver# " + carNum + " To This Order?")){
+                        document.getElementById("status").options.selectedIndex = "1";
+                        status = "C";
+                        var location = randomLocation[carNum].lat + "," + randomLocation[carNum].lng;
+                        xhttp.send('_xsrf=' + _xsrf + "&postType=updateRes&resID=" + resID + "&status=" + status + "&time=" + time + "&date=" + date + "&dept=" + dept + "&dest=" + dest + "&size=" + size + "&custNum=" + custNum + "&fare=" + fare + "&carNum=" + carNum + "&coord=" + location);
+                    }
+                }else{
+                    xhttp.send('_xsrf=' + _xsrf + "&postType=updateRes&resID=" + resID + "&status=" + status + "&time=" + time + "&date=" + date + "&dept=" + dept + "&dest=" + dest + "&size=" + size + "&custNum=" + custNum + "&fare=" + fare + "&carNum=" + carNum);
+                }
+
+            }
+
+            function delRes(){
+                var xhttp = new XMLHttpRequest();
+                var resID = document.getElementById("IDfield").innerHTML;
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == 'ok'){
+                            window.location.reload();
+                            document.getElementById("status").options.selectedIndex = "2";
+                            alert("Reservation Deleted!");
+                        }        
+                    }
+                };
+                if (confirm("Click YES to delete reservation ID " + resID)){
+                    xhttp.open("post", "admin-res", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send('_xsrf=' + _xsrf + "&postType=delRes&resID=" + resID);
+                }
+
+            }
+
+            function unassignDr(){
+                var xhttp = new XMLHttpRequest();
+                var carNum = document.getElementById("carNum").value;
+                var resID = document.getElementById("IDfield").innerHTML;
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == 'ok'){
+                            window.location.reload();
+                            alert("Driver #" + carNum +  " Has Been Unassigned!");
+                        }        
+                    }
+                };
+                if (confirm("Click YES To Unassign Driver #" + carNum)){
+                    xhttp.open("post", "admin-res", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send('_xsrf=' + _xsrf + "&postType=unassign&carNum=" + carNum);
+                }
+            }
+
+            function initMap(x=40.740160,y=-73.983363) {
+                divsGetWH();
+                getUser();
+                adminPage();
+                map = new google.maps.Map(document.getElementById('driverMap'), {
+                    //initializing driver current coords
+                     center: {lat: x, lng: y},
+                     zoom: 11
+                 });
+            }   
+
+            function addIdleDrMarker(dept){
+                var img = {
+                    url:"static/img/car.png",
+                    scaledSize: new google.maps.Size(50, 50)
+                };
+                var latLng = new Object;
+                var addressInfo = getDeptCoord(dept);
+
+                var randomNum = Math.random() * 0.05;
+                if (randomNum*100 % 2 > 1){
+                    latLng.lat = addressInfo.lat + randomNum;
+                }else if(randomNum*100 % 2 <1){
+                    latLng.lat = addressInfo.lat - randomNum;
+                }
+                
+                randomNum = Math.random() * 0.05;
+                if (randomNum*100 % 2 > 1){
+                    latLng.lng = addressInfo.lng + randomNum;
+                }else if(randomNum*100 % 2 < 1){
+                    latLng.lng = addressInfo.lng - randomNum;
+                }
+                
+                var carLatLng = new google.maps.LatLng(latLng.lat,latLng.lng);
+                var marker = new google.maps.Marker({
+                    position:carLatLng,
+                    icon:img
+                });
+                marker.setMap(map);
+
+                return latLng
+            }
+
+            function addCurDrMarker(lat,lng,dept){
+
+                var curLatLng = new google.maps.LatLng(Number(dept.lat),Number(dept.lng));
+                var curDeptMarker = new google.maps.Marker({
+                    position:curLatLng
+                });
+                curDeptMarker.setMap(map);
+
+                var latLng = new google.maps.LatLng(lat,lng);
+                var img = {
+                    url:"static/img/car2.png",
+                    scaledSize: new google.maps.Size(50, 50)
+                };
+                    
+                var marker = new google.maps.Marker({
+                    position:latLng,
+                    icon:img
+                });
+                marker.setMap(map);
+            }
+
+            function getDriverCoord(carNum){
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("post", "admin-res", false);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=drCoord&carNum=" + carNum)
+                return (JSON.parse(xhttp.responseText))["COORD"];
+            }
+
+            function getDeptCoord(dept){
+                var address = dept.split(" ").join("+");
+                var xhttp = new XMLHttpRequest();
+                var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyCg3O0U1rlie1FQ25XPVLllSAuHSUXcwXo";
+                xhttp.open("GET",url,false);
+                xhttp.send(null);
+                return (JSON.parse(xhttp.responseText)).results[0].geometry.location;
+            }
+
+            function divsGetWH(){
+                var uNav = document.getElementById("uNav");
+                var uNavTop = Number(uNav.offsetTop);
+                var uNavLeft = Number(uNav.offsetLeft);
+                var hNav = document.getElementById("hNav");
+                var caledLeft = uNavLeft + 180;
+                var caledTop = uNavTop + 4;
+                hNav.style.top = caledTop.toString() + "px";
+                hNav.style.left = caledLeft.toString() + "px";
+                
+                var infoPanel = document.getElementById("infoPanel");
+                caledTop +=50;
+                infoPanel.style.left = caledLeft.toString() + "px";
+                infoPanel.style.top = caledTop.toString() + "px";
+
+            }
+            
+            function adminPage(){
+                userType = "{{userType}}"
+                var adminBnt = document.getElementById("admin");
+                if (userType = "1"){
+                    adminBnt.style.display = "block";
+                }
+            }
+
+
+            function getUser(){
+                var accountField = document.getElementById("accountField");
+                var status = "{{status}}";
+                if (status == "ok"){
+                    var username = "{{userName}}";
+                    accountField.innerHTML = "Welcome " + username + "    |    <a href='/'><img src='/static/img/homepage.png' style='width:18px;height:18px'></a>    |    <a href='/cp'><img src='/static/img/cp.ico' style='width:18px;height:18px'></a>     |    <a href='/logout'><img src='/static/img/logout.png' style='width:18px;height:18px'></a>";
+                }else{
+                    alert(status);
+                }
+            }
+
+            
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3O0U1rlie1FQ25XPVLllSAuHSUXcwXo&signed_in=true&libraries=places&callback=initMap&language=en-US"
+        async defer></script>
+</body>
+
+</html>

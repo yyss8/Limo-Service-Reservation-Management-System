@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Limo System Control Panel</title>
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+    body{
+        margin:0px;
+        padding:0px;
+        font-family:"Montserrat", sans-serif;
+    }
+
+    html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td{
+        margin: 0;
+        padding: 0;
+    }
+
+    a{  
+        color:white;
+        text-decoration: none;
+    }
+
+    #accountField{
+        position:absolute;
+        right:20px;
+        top:10px;
+        color: #F7F7F7;
+    }
+
+    .bnt{
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }  
+
+    .selecctBnt{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .bnt:hover{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .submitBnt{
+        position: absolute;
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 110px;
+    }
+
+    .submitBnt:hover{
+        position: absolute;
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 110px;
+    }
+
+    #topMenu{
+        width: 100%;
+        background-color: gray;
+        line-height: 30px;
+        height: 50px;
+    }
+    body{
+        margin:0px;
+        padding:0px;
+    }
+
+    #uNav{        
+        width: 50px;
+        padding-left: 0px;
+    }
+
+    #hNav{
+        position: absolute;
+        width: 700px;
+        height: 35px;
+        line-height: 32px;
+        margin-right: 5px;
+    }
+
+    ul#hNavUl li {
+        display: inline;
+    }
+
+    .mainBody{
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    .f1{
+        width: 210px;
+        height: 50px;
+        font-size: 30px;
+        color: #555;
+        text-align: center;
+    }
+
+    .hNavBnt{  
+        border: none;
+        background:white;
+        color: #ff8f2b;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+
+    }
+    .hNavBnt:hover{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .u_header{
+        height:50px;
+        margin-bottom: 20px;
+        border-bottom: 2px #ebebeb solid;
+    }
+
+    .hSelectBnt{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .arrow{
+        position: absolute;
+        top: 30px;
+        left: 413px;
+        border-color: #fff transparent transparent;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px;
+    }
+
+    #infoPanel{
+        position: absolute;
+        width: 1030px;
+        height: 650px;
+        background-color: #f5f5f5;
+        
+    }
+
+    #infoPanel select{
+        position: absolute;
+    }
+
+    #infoPanel h3{
+        position: absolute;
+    }
+
+    #infoPanel input{
+        padding-left:5px;
+        position: absolute;
+        width: 120px;
+        height: 25px;
+    }
+
+    #infoPanel b{
+        position: absolute;
+    }
+
+    #infoPanel img{
+        position: absolute;
+        height: 35px;
+        width: 50px;
+    }
+
+    #infoPanel p{
+        position: absolute;
+    }
+    #infoPanel hr{
+        float: left;
+        position: relative;
+        top: 350px;
+        border-top: dotted 1px;
+        left: 80px;
+        width: 900px;
+    }
+
+    #infoPanel b{
+        position: absolute;
+    }
+
+     #bot1{
+        position:relative;
+        top:408px;
+        width:100%;
+        background-color: rgb(231, 76, 60);
+        height:90px;
+        text-align:center;
+    }
+    #bot1 h1{
+        position:absolute;
+        color:white;
+        top:23px;
+    }
+
+    #bot2{
+        top:408px;
+        position:relative;
+        width:100%;
+        background-color: #363434;  
+        height:230px;
+    }
+
+    #bot3{
+        position:relative;
+        top:400px;
+        width:100%;
+        background-color: black;  
+        height:50px;
+    }
+
+    #bot3 h5{
+        position:relative;
+        padding-top:20px;
+        margin-top:-5px;
+        margin-bottom:-5px;
+        color:#A6A5A5;
+    }
+
+    #bot3 a{
+        color:#A6A5A5;
+    }
+
+    #bot3 a:hover{
+        color: rgb(231, 76, 60);
+    }
+</style>
+
+<body onload="divsGetWH();getUser();userTypePage()">
+    <div id="topMenu"><div id="accountField"></div></div>
+    <div class="mainBody">
+        <div class="u_header">
+            <h1 class="f1">Control Panel</h1>
+        </div>
+        <div id="uNav">
+            <ul style="list-style-type:none"> 
+                <li><a href="#"><button class="selecctBnt">Profile</button></a><hr width="140" align="left"></li>
+                <li><a href="http://www.google.com"><button class="bnt">Messages</button></a><hr width="140" align="left"></li>
+                <li><a href="/cp-rl"><button class="bnt">Reservations</button></a><hr width="140" align="left"></li>
+                <li id="admin" style="display:none"><a href="/admin"><button class="bnt" >ADMIN</button></a><hr width="140" align="left"></li>
+                <li id="driver" style="display:none"><a href="/driver"><button class="bnt" >DRIVER</button></a><hr width="140" align="left"></li>
+            </ul>
+        </div>
+
+        <div id="hNav">
+            <ul id="hNavUl" style="list-style-type:none"> 
+                 <li><a href="/cp"><button class="hNavBnt">Basic Information</button></a></li>
+                 <li><a href="/cp-pw"><button class="hNavBnt">Change Password<div class="arrow"></div></button></a></li>
+                 <li><a href="#"><button class="hSelectBnt">Balance</button></a></li>
+            </ul>
+        </div>
+
+        <div id="infoPanel">
+            <h3 style="top:50px;left:80px">Balance: ${{balance}}</h3>
+            <h3 style="top:115px;left:80px">Recharge </h3>
+            <b style="top:150px;left:80px;font-size:10px;">Payment Method</b>
+            <b style="top:240px;left:80px;font-size:10px;">Contact Info</b>
+            <input type="text" style="top:260px;left:80px;" placeholder="First Name">
+            <input type="text" style="top:260px;left:240px;" placeholder="Last Name">
+            <input type="text" style="top:310px;left:80px;width:280px;" placeholder="E-mail">
+            <hr>
+            <div id="cardMethod" style="display:block">
+                <b style="top:390px;left:80px;font-size:10px;">Billing Info</b>
+                <input type="text" style="top:420px;left:80px;width:195px;" placeholder="Credit Card Number">
+                <input type="text" style="top:420px;left:310px;width:50px;" placeholder="CSV">
+                <p style="top:475px;left:80px;font-size:10px;">Exp. Date</p>
+                <SELECT style="top:471px;left:155px;">
+                    <option>01 - January</option>
+                    <option>02 - February</option>
+                    <option>03 - March</option>
+                    <option>04 - April</option>
+                    <option>05 - May</option>
+                    <option>06 - June</option>   
+                    <option>07 - July</option>
+                    <option>08 - August</option>
+                    <option>09 - September</option>
+                    <option>10 - Octobor</option>
+                    <option>11 - November</option>
+                    <option>12 - December</option>
+                </SELECT>
+
+                <SELECT style="top:471px;left:280px;">
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>   
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                    <option>2026</option>
+                </SELECT>
+                <input type="text" style="top:510px;left:80px;width:70px;" placeholder="ZIP Code">  
+            </div>
+
+            <div id="paypalMethod" style="display:none">
+                <b style="top:390px;left:80px;font-size:10px;">Click The Icon Below To Pay With Paypal.</b>
+            </div>
+
+            <div id="cardMethod"></div>
+            <p style="top:580px;left:80px">Recharge Amount: $</p>
+            <form method="post">
+                {% raw xsrf_form_html() %}
+                <input name="pay" type="radio" id="cards" style="top:180px;left:30px" checked onclick="changeMethod()"> <img src="static/img/credit_card_logo.png" style="width:125px;top:175px;left:110px"> 
+                <input name= "pay" type="radio" id="paypal" style="top:180px;left:210px" onclick="changeMethod()"><img src="static/img/paypal-logo.png" style="top:175px;left:290px">
+                <input type="number" name="amount" placeholder="0.00" style="top:575px;left:250px;width:80px" required>
+                <button id="submitBnt2" type="submit" style="display:none;position:absolute;top:460px;left:110px;width:160px;height:50px;background-image: url('static/img/paypal_enter.png');background-size:100% 100%;"></button> 
+                <button id="submitButton" class="submitBnt" type="submit" style="top:575px;right:140px">Submit</button> 
+            </form>
+            <button id="clearButton" class="submitBnt" onclick="resetPanel()" style="top:575px;right:20px">Clear</button>
+        </div>
+
+    </div>
+    <div id="bot1"><img id= "bot2Ico" src="static/img/botH.png" width="60px" height="60px" style="position:absolute;top:15px;"><h1 id="bot1h1">Need Any Help? CALL NOW! +1 800 666 6666</h1></div>
+    <div id="bot2">
+        <span id="botLogo" style="position:absolute;top:50px;"><img src="static/img/logo.png" height="80px" width="80px" ></span>
+        <span id="botSign" style="text-align:left;position:absolute;top:63px;"><a href="#"><b style="font-size:40px;">Li<b style="color:red">mo</b></b><br><b>Limo Service</b></a></span>
+    </div>
+    <div id="bot3">
+        <h5 id="bot3H">Copyright 2016 © Limo Service. All rights reserved. Terms of use | <a href="#">Privacy Policy</a></h5>
+    </div>
+
+<script>
+
+            function getUser(){
+                var accountField = document.getElementById("accountField");
+                var status = "{{status}}";
+                if (status == "ok"){
+                    var username = "{{userName}}";
+                    accountField.innerHTML = "Welcome " + username + "    |    <a href='/'><img src='/static/img/homepage.png' style='width:18px;height:18px'></a>    |    <a href='/cp'><img src='/static/img/cp.ico' style='width:18px;height:18px'></a>     |    <a href='/logout'><img src='/static/img/logout.png' style='width:18px;height:18px'></a>";
+                }else{
+                    alert(status);
+                }
+            }
+
+            function divsGetWH(){
+                var uNav = document.getElementById("uNav");
+                var uNavTop = Number(uNav.offsetTop);
+                var uNavLeft = Number(uNav.offsetLeft);
+                var hNav = document.getElementById("hNav");
+                var caledLeft = uNavLeft + 180;
+                var caledTop = uNavTop + 4;
+                var botH1 = document.getElementById("bot1h1");
+                var bot2Ico = document.getElementById("bot2Ico");
+                var botLogo = document.getElementById("botLogo");
+                var botSign = document.getElementById("botSign");
+                var botH5 = document.getElementById("bot3H");
+                hNav.style.top = caledTop.toString() + "px";
+                hNav.style.left = caledLeft.toString() + "px";
+                
+                var infoPanel = document.getElementById("infoPanel");
+                caledTop +=50;
+                botH1.style.left = (caledLeft + 105).toString() + "px";
+                bot2Ico.style.left = (caledLeft + 20).toString() + "px";
+                infoPanel.style.left = caledLeft.toString() + "px";
+                infoPanel.style.top = caledTop.toString() + "px";
+                botH5.style.paddingLeft = (caledLeft + 15).toString() + "px";
+                botLogo.style.left = (caledLeft + 10) + "px";
+                botSign.style.left = (caledLeft + 110).toString() + "px";
+            }
+
+            
+            function userTypePage(){
+                userType = "{{userType}}"
+                if (userType == "1"){
+                    document.getElementById("admin").style.display = "block";
+                }else if (userType == "3"){
+                    document.getElementById("driver").style.display = "block";
+                }
+            }
+
+            function changeMethod(){
+                var sumbitButton = document.getElementById("submitButton");
+                var clearButton = document.getElementById("clearButton");
+                var cardOpt = document.getElementById("cards");
+                var paypalOpt = document.getElementById("paypal");
+                if (cardOpt.checked != true){
+                    paypalOpt.checked = true;
+                    sumbitButton.style.display = "none";
+                    clearButton.style.display = "none";
+                    document.getElementById("cardMethod").style.display = "none";
+                    document.getElementById("paypalMethod").style.display = "block"; 
+                    document.getElementById("submitBnt2").style.display = "block";
+                }else if (paypalOpt.checked != true){
+                    cardOpt.checked = true;
+                    sumbitButton.style.display = "block";
+                    clearButton.style.display = "block";
+                    document.getElementById("paypalMethod").style.display = "none";     
+                    document.getElementById("cardMethod").style.display = "block";   
+                    document.getElementById("submitBnt2").style.display = "none";
+                }
+
+
+            }
+            
+            
+</script>
+</body>
+</head>
+</html>

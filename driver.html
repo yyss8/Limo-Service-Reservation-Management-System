@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Limo System Control Panel</title>
+<style>
+
+
+    html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td{
+        margin: 0;
+        padding: 0;
+    }
+
+    #accountField{
+        position:absolute;
+        right:20px;
+        top:10px;
+        color: #F7F7F7;
+    }
+
+    .bnt{
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }  
+
+    .selecctBnt{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .bnt:hover{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .panelBnt{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 11px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 55px;
+    }
+
+    .panelBnt:hover{
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 11px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 55px;
+    }
+
+    #topMenu{
+        width: 100%;
+        background-color: gray;
+        line-height: 30px;
+        height: 50px;
+    }
+    body{
+        margin:0px;
+        padding:0px;
+    }
+
+    #uNav{        
+        width: 50px;
+        padding-left: 0px;
+    }
+
+    #hNav{
+        position: absolute;
+        width: 700px;
+        height: 35px;
+        line-height: 32px;
+        margin-right: 5px;
+    }
+
+    ul#hNavUl li {
+        display: inline;
+    }
+
+    .mainBody{
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    .f1{
+        width: 210px;
+        height: 50px;
+        font-size: 30px;
+        color: #555;
+        text-align: center;
+    }
+
+    .hNavBnt{  
+        border: none;
+        background:white;
+        color: #ff8f2b;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+
+    }
+    .hNavBnt:hover{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .u_header{
+        height:50px;
+        margin-bottom: 20px;
+        border-bottom: 2px #ebebeb solid;
+    }
+
+    .hSelectBnt{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .arrow{
+        position: absolute;
+        top: 30px;
+        left: 52px;
+        border-color: #fff transparent transparent;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px;
+    }
+
+    #resList{
+        position:absolute;
+        overflow-y:scroll;
+        width:950px;
+        height:300px;
+        top:40px;
+        left:30px; 
+        background-color: #FFFFFF;
+        border: 2px solid #73AD21;
+    }
+
+    #resField td{
+        text-align:center;
+        cursor:default;
+    }
+
+    .selectedRes{
+        background-color:#0EABFE;
+        color:white;
+    }
+
+    #infoPanel{
+        position: absolute;
+        width: 1030px;
+        height: 700px;
+        background-color: #f5f5f5;
+        
+    }
+
+    #infoPanel p{
+        position: absolute;
+    }
+
+    #infoPanel input{
+        padding-left:5px;
+        position: absolute;
+        width: 120px;
+        height: 20px;
+    }
+
+    #infoPanel b{
+        position: absolute;
+    }
+
+    #infoPanel img{
+        position: absolute;
+        height: 15px;
+        width: 15px;
+    }
+
+    #driverMap{
+        position:absolute;
+        top:360px;
+        height:320px;
+        width: 430px;
+        left:30px;
+        background-color: #FFFFFF;
+    }
+    
+    #newResField{
+        position:absolute;
+        height:260px;
+        width: 485px;
+        top:360px;
+        left:500px;
+    }
+
+    #newResField p{
+        position:absolute;
+    }
+
+    #currentResField{
+        position:absolute;
+        height:260px;
+        width: 485px;
+        top:360px;
+        left:500px;
+    }
+
+
+</style>
+</head>
+<body onload="divsGetWH();getUser();userTypePage()">
+    <div id="topMenu"><div id="accountField"></div></div>
+    <div class="mainBody">
+        <div class="u_header">
+            <h1 class="f1">Control Panel</h1>
+        </div>
+        <div id="uNav">
+            <ul style="list-style-type:none"> 
+                <li><a href="/cp"><button class="bnt">Profile</button></a><hr width="140" align="left"></li>
+                <li><a href="http://www.google.com"><button class="bnt">Messages</button></a><hr width="140" align="left"></li>
+                <li><a href="/cp-rl"><button class="bnt">Reservations</button></a><hr width="140" align="left"></li>
+                <li id="driver" style="display:none"><a href="#"><button class="selecctBnt" >DRIVER</button></a><hr width="140" align="left"></li>
+            </ul>
+        </div>
+
+        <div id="hNav">
+            <ul id="hNavUl" style="list-style-type:none"> 
+                 <li><a href="#"><button class="hSelectBnt">Job Order<div class="arrow"></div></button></a></li>
+                 <li><a href="/dr-info"><button class="hNavBnt">Car Info</button></a></li>    
+            </ul>
+        </div>
+
+        <div id="infoPanel">
+            <b style="top:5px;left:30px;">Reservation List:</b>
+            <p style="top:5px;left:210px;">Refresh Rate:<p>
+            <input type="text" id="rfsRate" value="180" style="posistion:absolute;top:4px;left:320px;width:25px;">
+            <button onclick="refreshRate()" class="panelBnt" style="position:absolute;top:1px;left:440px;">Refresh</button>
+            <p style="top:5px;left:365px;">Seconds</p>
+            <div id="resList">
+                <table id="resField" width="100%" border="0" cellpadding="5" cellspacing="2" bgcolor="#FFFFFF">
+                    <tbody id="resBody"><tr>
+                        <td id= "title" width="33%" bgcolor="#ffffff">Departure</td>
+                        <td id= "title" width="33%" bgcolor="#ffffff">Destination</td>
+                        <td id="title" width="16%" bgcolor="#ffffff">PickUp Time</td>
+                        <td id= "title" width="12%" bgcolor="#ffffff">Passenger #</td>
+                        <td id= "title" width="6%" bgcolor="#ffffff">Fare</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="driverMap"></div>
+            <div id="newResField" style="display:none;">
+                <p style="left:160px;">Current Job: None</p>
+                <p name="num" style="top:50px;left:10px;">Passenger #:</p>
+                <p name="size" style="top:50px;left:290px;">Requested Car Size:</p>
+                <p name="time" style="top:100px;left:10px;">Requested Time:</p>
+                <p name="name" style="top:150px;left:10px;">Contact Name:</p>
+                <p name="phone" style="top:200px;left:10px;">Contact Phone:</p>
+                <button class="panelBnt" style="position:absolute;top:290px;right:0px;width:120px;" onclick="takeRes()">Take This Job</button>
+            </div>
+            <input type="hidden" id="selectedRes">
+            <div id="currentResField" style="display:none;">
+                <p name="jobNum" style="left:160px;"></p>
+                <p name="dept" style="top:50px;left:0px;"></p>
+                <p name="dest" style="top:100px;left:0px;"></p>
+                <p name="time" style="top:150px;left:0px;"></p>
+                <p name="num" style="top:200px;left:330px;"></p>
+                <p name="name" style="top:200px;left:0px;"></p>
+                <p name="size" style="top:150px;left:330px;"></p>
+                <p name="phone" style="top:250px;left:0px;"></p>
+                <p name="fare" style="top:250px;left:330px;"></p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+<script>
+            var map,resList,directionsService,directionsDisplay;
+            var _xsrf = getCookie("_xsrf");
+            var username = "{{userName}}";
+            var userType = "{{userType}}";
+
+            function getCookie(name) {
+                var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+                return r ? r[1] : undefined;
+            }
+
+            function getUser(){
+                var accountField = document.getElementById("accountField");
+                var status = "{{status}}";
+                if (status == "ok"){
+                    var username = "{{userName}}";
+                    accountField.innerHTML = "Welcome " + username + "    |    <a href='/'><img src='/static/img/homepage.png' style='width:18px;height:18px'></a>    |    <a href='/cp'><img src='/static/img/cp.ico' style='width:18px;height:18px'></a>     |    <a href='/logout'><img src='/static/img/logout.png' style='width:18px;height:18px'></a>";
+                }else{
+                    alert(status);
+                }
+            }
+
+            function divsGetWH(){
+                var uNav = document.getElementById("uNav");
+                var uNavTop = Number(uNav.offsetTop);
+                var uNavLeft = Number(uNav.offsetLeft);
+                var hNav = document.getElementById("hNav");
+                var caledLeft = uNavLeft + 180;
+                var caledTop = uNavTop + 4;
+                hNav.style.top = caledTop.toString() + "px";
+                hNav.style.left = caledLeft.toString() + "px";
+                
+                var infoPanel = document.getElementById("infoPanel");
+                caledTop +=50;
+                infoPanel.style.left = caledLeft.toString() + "px";
+                infoPanel.style.top = caledTop.toString() + "px";
+
+            }
+
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName == "TD" && e.target.id != "title" && document.getElementById("currentResField").style.display != "block"){
+                    for (var i = 0;i<e.target.parentNode.parentNode.childElementCount;i++){
+                        e.target.parentNode.parentNode.children[i].className = "";
+                    }
+                    e.target.parentNode.className = "selectedRes";
+                    for (var i = 1;i <= Object.keys(resList).length;i++){
+                        if (resList[i.toString()]["DEPT"] == e.target.parentNode.children[0].textContent){
+                            selectRes(i.toString());
+                            break;
+                        }
+                    }
+                }
+            });
+
+            function getCurJob(){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == "0"){
+                            document.getElementById("currentResField").style.display = "none";
+                            document.getElementById("newResField").style.display = "block";
+                            getResList();
+                        }else{
+                            var curJob = JSON.parse(xhttp.responseText);
+                            document.getElementById("newResField").style.display = "none";
+                            document.getElementById("currentResField").style.display = "block";    
+                            insertCurJob(curJob);
+                            getResList();
+                        }
+                    }
+                };
+                xhttp.open("post", "driver", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=getCurJob&un=" + username);
+            }
+
+            function insertCurJob(job){
+                document.getElementsByName("jobNum")[0].innerHTML = "<pre>Current Job #: <b>" + job["ID"] + '</b></pre>'; //job#
+                document.getElementsByName("dept")[0].innerHTML = "<pre>Departure: <b>" + job["DEPT"] + '</b></pre>'; //dept address
+                document.getElementsByName("dest")[0].innerHTML = "<pre>Destination: <b>" + job["DEST"] + '</b></pre>'; // dest address
+                var date = job['DATE'].slice(4,6) + "/" + job['DATE'].slice(6,8) + "/" + job["DATE"].slice(0,4); 
+                var time = date + " - " + job['TIME'].slice(0,2) + ":" + job['TIME'].slice(2,4);
+                document.getElementsByName("time")[1].innerHTML = "<pre>Requested Time: <b>" + time  + '</b></pre>'; //pick up TIME       
+                var name = job['FIRSTNAME'] + " " + job['LASTNAME'];
+                document.getElementsByName("name")[1].innerHTML = "<pre>Customer Name: <b>" + name + '</b></pre>'; //customer name
+                var phone = job['phone'].slice(0,3) + "-" + job['phone'].slice(3,6) + "-" + job['phone'].slice(6,10);
+                document.getElementsByName("phone")[1].innerHTML = "<pre>Contact Phone: <b>" + phone + '</b></pre>'; //phone number
+                document.getElementsByName("num")[1].innerHTML = "<pre>Passenger #: <b>" + job['CUSTNUM'] + '</b></pre>'; //passenger #
+                document.getElementsByName("fare")[0].innerHTML = "<pre>Fare: <b>$" + job['FARE'] + '</b></pre>'; //order price
+                document.getElementsByName("size")[1].innerHTML = "<pre>Requested Size: <b>" + job['SIZE'] + '</b></pre>'; //car size
+            }
+
+            function getResList(){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        var table = document.getElementById("resField");
+                        while(table.rows.length > 1) {
+                            table.deleteRow(1);
+                        }
+                        resList = JSON.parse(xhttp.responseText);
+                        insertRes(resList);
+                        
+                    }
+                };
+
+                xhttp.open("post", "driver", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                if (document.getElementById("newResField").style.display == "block"){
+                    xhttp.send('_xsrf=' + _xsrf + "&postType=getResList&un=" + username);
+                }else if (document.getElementById("currentResField").style.display == "block"){
+                    xhttp.send('_xsrf=' + _xsrf + "&postType=getResList&un=None");
+                }
+                
+            }
+
+            function insertRes(res){
+                var resTable = document.getElementById("resField");
+                for (var i = 1;i <= Object.keys(res).length;i++){
+                    var newRow = resTable.insertRow(-1);
+                    newRow.insertCell(0).innerHTML = res[i.toString()]["DEPT"];
+                    newRow.insertCell(1).innerHTML = res[i.toString()]["DEST"];
+                    var date = resList[i.toString()]['DATE'].slice(4,6) + "/" + resList[i.toString()]['DATE'].slice(6,8) + "/" + resList[i.toString()]['DATE'].slice(0,4); 
+                    var TIME = date + " - " + resList[i.toString()]['TIME'].slice(0,2) + ":" + resList[i.toString()]['TIME'].slice(2,4);
+                    newRow.insertCell(2).innerHTML = TIME;
+                    newRow.insertCell(3).innerHTML = res[i.toString()]["CUSTNUM"];
+                    newRow.insertCell(4).innerHTML = "$" + res[i.toString()]["FARE"];
+                }
+            }
+
+            function selectRes(jobNum){ 
+                document.getElementById("selectedRes").value = resList[jobNum]['ID'];
+                var date = resList[jobNum]['DATE'].slice(4,6) + "/" + resList[jobNum]['DATE'].slice(6,8) + "/" + resList[jobNum]['DATE'].slice(0,4); 
+                var TIME = date + " - " + resList[jobNum]['TIME'].slice(0,2) + ":" + resList[jobNum]['TIME'].slice(2,4);
+                document.getElementsByName("time")[0].innerHTML = "<pre>Requested Time: <b>" + TIME + '</b></pre>'; //pick up TIME
+                var name = resList[jobNum]['FIRSTNAME'] + " " + resList[jobNum]['LASTNAME'];
+                document.getElementsByName("name")[0].innerHTML = "<pre>Customer Name: <b>" + name + '</b></pre>'; //customer name
+                var phone = resList[jobNum]['phone'].slice(0,3) + "-" + resList[jobNum]['phone'].slice(3,6) + "-" + resList[jobNum]['phone'].slice(6,10);
+                document.getElementsByName("phone")[0].innerHTML = "<pre>Contact Phone: <b>" + phone + '</b></pre>'; //phone number
+                document.getElementsByName("num")[0].innerHTML = "<pre>Passenger #: <b>" + resList[jobNum]['CUSTNUM'] + '</b></pre>'; //passenger #
+                document.getElementsByName("size")[0].innerHTML = "<pre>Requested Size: <b>" + resList[jobNum]['SIZE'] + '</b></pre>'; //car size
+                getRoute(resList[jobNum]["DEPT"],resList[jobNum]["DEST"]);
+            }
+
+            function takeRes(){
+                var id = document.getElementById("selectedRes").value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == "ok"){
+                            window.location.reload();
+                            alert("Job #" + id + " Has Been Assigned To You, Please Contact The Customer First!");
+                        }
+                        
+                    }
+                };
+
+
+                if (confirm("Click YES To Confirm Taking Order #" + id)){
+                    xhttp.open("post", "driver", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send('_xsrf=' + _xsrf + "&postType=takeRes&id=" + id + "&un=" + username);
+                }
+                
+            }
+            
+            function userTypePage(){
+                
+                if (userType == "3"){
+                    document.getElementById("driver").style.display = "block";
+                }else{
+                    document.getElementById("typeField").innerHTML = "Customer";
+                }
+            }
+
+            function initMap() {
+                divsGetWH();
+                getUser();
+                userTypePage();
+                getCurJob();
+                directionsService = new google.maps.DirectionsService;
+                directionsDisplay = new google.maps.DirectionsRenderer;
+                map = new google.maps.Map(document.getElementById('driverMap'), {
+                    //initializing driver current coords
+                     center: {lat: 40.740160, lng: -73.983363},
+                     zoom: 12
+                 });
+                 directionsDisplay.setMap(map);
+            }  
+
+            function getRoute(dept,dest){
+                
+                var getDept = dept.split(" ").join("+");
+                var getDest = dest.split(" ").join("+");
+                
+                var deptID = getRouteData(getDept);
+                var destID = getRouteData(getDest);
+
+                directionsService.route({
+                    origin: {'placeId': deptID},
+                    destination: {'placeId': destID},
+                    travelMode: google.maps.TravelMode.DRIVING
+                }, function(response, status) {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response)
+                    } else {
+                    window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            }
+
+            function getRouteData(address){
+                var xhttp = new XMLHttpRequest();
+                url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyCg3O0U1rlie1FQ25XPVLllSAuHSUXcwXo";
+                xhttp.open("GET",url,false); // false for synchronous request
+                xhttp.send(null);
+                return (JSON.parse(xhttp.responseText))["results"][0]["place_id"]
+            }
+            
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3O0U1rlie1FQ25XPVLllSAuHSUXcwXo&signed_in=true&libraries=places&callback=initMap&language=en-US"
+        async defer></script>
+</body>
+</head>
+</html>

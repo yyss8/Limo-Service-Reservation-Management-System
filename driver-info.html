@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Limo System Control Panel</title>
+<style>
+
+
+    html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td{
+        margin: 0;
+        padding: 0;
+    }
+
+    #accountField{
+        position:absolute;
+        right:20px;
+        top:10px;
+        color: #F7F7F7;
+    }
+
+    .bnt{
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }  
+
+    .selecctBnt{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .bnt:hover{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .submitBnt{
+        position: absolute;
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 110px;
+    }
+
+    .submitBnt:hover{
+        position: absolute;
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 110px;
+    }
+
+    #topMenu{
+        width: 100%;
+        background-color: gray;
+        line-height: 30px;
+        height: 50px;
+    }
+    body{
+        margin:0px;
+        padding:0px;
+    }
+
+    #uNav{        
+        width: 50px;
+        padding-left: 0px;
+    }
+
+    #hNav{
+        position: absolute;
+        width: 700px;
+        height: 35px;
+        line-height: 32px;
+        margin-right: 5px;
+    }
+
+    ul#hNavUl li {
+        display: inline;
+    }
+
+    .mainBody{
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    .f1{
+        width: 210px;
+        height: 50px;
+        font-size: 30px;
+        color: #555;
+        text-align: center;
+    }
+
+    .hNavBnt{  
+        border: none;
+        background:white;
+        color: #ff8f2b;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+
+    }
+    .hNavBnt:hover{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .u_header{
+        height:50px;
+        margin-bottom: 20px;
+        border-bottom: 2px #ebebeb solid;
+    }
+
+    .hSelectBnt{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .arrow{
+        position: absolute;
+        top: 30px;
+        left: 173px;
+        border-color: #fff transparent transparent;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px;
+    }
+
+    #infoPanel{
+        position: absolute;
+        width: 1030px;
+        height: 400px;
+        background-color: #f5f5f5;
+        
+    }
+
+    #infoPanel p{
+        position: absolute;
+    }
+
+    #infoPanel input{
+        display:none;
+        padding-left:5px;
+        position: absolute;
+        width: 120px;
+        height: 20px;
+    }
+
+    #infoPanel b{
+        position: absolute;
+    }
+
+    #infoPanel img{
+        position: absolute;
+        height: 15px;
+        width: 15px;
+    }
+
+</style>
+</head>
+<body onload="divsGetWH();getUser();userTypeSize()">
+    <div id="topMenu"><div id="accountField"></div></div>
+    <div class="mainBody">
+        <div class="u_header">
+            <h1 class="f1">Control Panel</h1>
+        </div>
+        <div id="uNav">
+            <ul style="list-style-type:none"> 
+                <li><a href="/cp"><button class="selecctBnt">Profile</button></a><hr width="140" align="left"></li>
+                <li><a href="http://www.google.com"><button class="bnt">Messages</button></a><hr width="140" align="left"></li>
+                <li><a href="/cp-rl"><button class="bnt">Reservations</button></a><hr width="140" align="left"></li>
+                <li id="driver" style="display:none"><a href="#"><button class="bnt" >DRIVER</button></a><hr width="140" align="left"></li>
+            </ul>
+        </div>
+
+        <div id="hNav">
+            <ul id="hNavUl" style="list-style-type:none"> 
+                 <li><a href="/driver"><button class="hNavBnt">Job Order</button></a></li>
+                 <li><a href="#"><button class="hSelectBnt">Car Info<div class="arrow"></div></button></a></li>    
+            </ul>
+        </div>
+
+        <div id="infoPanel">
+            <p style="top:50px;left:80px">User ID: <b style="top:0px;left:100px">{{userID}}</b></p>
+            <p style="top:50px;left:400px">Car #: <b id="carNum" style="top:0px;left:100px">{{carNum}}</b></p>
+            <p style="top:130px;left:80px">Car Model: <b name="carModel" style="top:0px;left:100px">{{carModel}}</b><img id="carModel" style="top:4px;left:190px" src="/static/img/mfy.png" alt="Modify" onclick="changeInfo(this.id)"></p>
+            <p style="top:130px;left:400px">Car Year: <b name="carYear" style="top:0px;left:100px">{{carYear}}</b><img id="carYear" style="top:4px;left:155px" src="/static/img/mfy.png" alt="Modify" onclick="changeInfo(this.id)"></p>
+            <p style="top:210px;left:80px">Car Color: <b name="carColor" style="top:0px;left:100px">{{carColor}}</b><img id="carColor" style="top:4px;left:160px" src="/static/img/mfy.png" alt="Modify" onclick="changeInfo(this.id)"></p>
+            <p style="top:290px;left:80px">Car Size: <b name="carSize" style="top:0px;left:100px">{{carSize}}</b><img id="carSize" style="top:4px;left:155px" src="/static/img/mfy.png" alt="Modify" onclick="changeInfo(this.id)"></p>
+            <button class="submitBnt" type="submit" style="top:340px;right:140px" onclick="updateCarInfo()">Update</button> 
+            <button class="submitBnt" onclick="window.location.reload()" style="top:340px;right:20px">Reset</button>
+            <input class="inputBox" value="{{carModel}}" name="carModel" style="top:130px;left:166px;width:80px;" maxlength="12">
+            <input class="inputBox" value="{{carColor}}" name="carColor" style="top:210px;left:166px;width:60px;" maxlength="12">
+            <input class="inputBox" value="{{carYear}}" name="carYear" style="top:130px;left:496px;width:40px;" maxlength="4">
+            <select name="carSize" style="position:absolute;top:292px;left:166px;display:none;">
+                <option value="SD">SD</option>
+                <option value="SUV">SUV</option>
+                <option value="VN">VN</option>
+            </select>
+        </div>
+    </div>
+
+
+<script>
+
+            var driverList;
+            var _xsrf = getCookie("_xsrf");
+            var username = "{{userName}}";
+
+            function getCookie(name) {
+                var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+                return r ? r[1] : undefined;
+            }
+
+            function updateCarInfo(){
+                
+                var xhttp = new XMLHttpRequest();
+                var num = document.getElementById("carNum").textContent;
+                
+                var model = document.getElementsByName("carModel")[1].value;
+                var year = document.getElementsByName("carYear")[1].value;
+                var color = document.getElementsByName("carColor")[1].value;
+                var size = document.getElementsByName("carSize")[1];
+
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if(xhttp.responseText == "ok"){
+                            window.location.reload();
+                            alert("Car Info Updated!");
+                        }
+                    }
+                };
+                xhttp.open("post", "dr-info", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=updateDr&num=" + num + "&model=" + model + "&year=" + year + "&color=" + color + "&size=" + size.options[size.selectedIndex].value);
+                
+            }
+
+  
+            
+            function userTypeSize(){
+                var userType = "{{userType}}"
+                var carSize = "{{carSize}}"
+                var sizeSelect = document.getElementsByName("carSize")[1];
+                if (userType == "3"){
+                    document.getElementById("driver").style.display = "block";
+                }
+                if (carSize = "SD"){
+                    sizeSelect.selectedIndex = 0;
+                }else if (carSize = "SUV"){
+                    sizeSelect.selectedIndex = 1;
+                }else if (carSize = "VN"){
+                    sizeSelect.selectedIndex = 2;
+                }
+
+            }
+
+            function changeInfo(id){
+                var getInput = document.getElementsByName(id)[1];
+                getInput.style.display = "block";
+            }
+
+            function divsGetWH(){
+                var uNav = document.getElementById("uNav");
+                var uNavTop = Number(uNav.offsetTop);
+                var uNavLeft = Number(uNav.offsetLeft);
+                var hNav = document.getElementById("hNav");
+                var caledLeft = uNavLeft + 180;
+                var caledTop = uNavTop + 4;
+                hNav.style.top = caledTop.toString() + "px";
+                hNav.style.left = caledLeft.toString() + "px";
+                
+                var infoPanel = document.getElementById("infoPanel");
+                caledTop +=50;
+                infoPanel.style.left = caledLeft.toString() + "px";
+                infoPanel.style.top = caledTop.toString() + "px";
+
+            }
+
+            function getUser(){
+                var accountField = document.getElementById("accountField");
+                var status = "{{status}}";
+                if (status == "ok"){   
+                    accountField.innerHTML = "Welcome " + username + "    |    <a href='/'><img src='/static/img/homepage.png' style='width:18px;height:18px'></a>    |    <a href='/cp'><img src='/static/img/cp.ico' style='width:18px;height:18px'></a>     |    <a href='/logout'><img src='/static/img/logout.png' style='width:18px;height:18px'></a>";
+                }else{
+                    alert(status);
+                }
+            }
+            
+            
+</script>
+</body>
+</head>
+</html>

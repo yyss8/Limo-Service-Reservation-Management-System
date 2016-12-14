@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <title>Limo Reservaion System</title>
+    <div id="bodyMask" onclick="menuField()"></div>
+
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+    body{
+        margin:0px;
+        padding:0px;
+        font-family:"Montserrat", sans-serif;
+    }
+
+    button{
+        font-family:"Montserrat", sans-serif;
+    }
+
+    a{  
+        color:white;
+        text-decoration: none;
+    }
+
+    .map{
+       top:250px;
+       width: 1000px;
+       height:400px; 
+       z-index: 1;
+       margin:0 auto;
+    }
+    
+    #accountField{
+        position:fixed;
+        right:20px;
+        top:10px;
+        color: #F7F7F7;
+    }
+
+    #resField{
+        position:fixed;
+        width:900px; 
+        height:350px; 
+        top: 250px;
+        border:1px solid #888; 
+        background-color:#e9f0f7; 
+        filter:alpha(opacity=50);
+        z-index: 3;
+    }
+
+    .dateSelects{
+        position:absolute;
+    }
+
+    #bodyMask{
+       position:absolute;
+       background-color:black;
+       height:250%; 
+       width:100%;
+       filter:alpha(opacity=100);  
+       -moz-opacity:0.5;  
+       -khtml-opacity: 0.5;  
+       opacity: 0.5;  
+       display:none;
+       z-index: 2;
+    }
+
+    #accountMenu{
+        position:fixed; 
+        width:750px; 
+        height:550px; 
+        margin-top:-200px; 
+        border:1px solid #888; 
+        background-color:#e9f0f7; 
+        text-align:center;
+        filter:alpha(opacity=50);
+        z-index: 3;
+    }
+
+    #accountMenu img{
+        position: absolute;
+        display: none;
+        height: 15px;
+        width: 15px;
+    }
+
+    #signUpAcc{
+        position:absolute;
+        left:80px;
+        top:50px;
+    }
+
+    .resField-title{
+        position:absolute;
+        color: black;
+    }
+    
+    #loginAcc{
+        position:absolute;
+        left:465px;
+        top:50px;
+    }
+    
+    .inputBox{
+        height: 30px;
+        width: 200px;
+        color:#9F9F9F;
+    }
+
+    .addressInput{
+        width:450px;
+        top:200px;
+        padding-left: 10px;
+        height: 30px;
+    }
+
+    .bnt{
+        position:relative;
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 115px;
+    }   
+
+    .bnt:hover{
+        position:relative;
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 115px;
+    }
+
+    #popUpMenu{
+        position:relative;
+        top: -30px;
+        width: 900px;
+        margin: 0 auto;
+    }
+
+    #loginPopUpMenu{
+        position:relative;
+        top: 0px;
+        width: 750px;
+        margin: 0 auto;
+    }
+
+
+    #topMenu{
+        position:fixed;
+        width: 100%;
+        background-color: gray;
+        line-height: 30px;
+        height: 50px;
+        z-index: 2;
+    }
+
+    #topNavMenu{
+        position:relative;
+        list-style-type:none;
+        margin:0 auto;
+        text-align:center;
+        padding-top:70px;
+    }
+
+    #topNavMenu li{
+        margin:0 60px 20px 0;
+        display: inline;
+    }
+
+    #topNavMenu li a{
+        color:gray;
+    }
+
+    #topNavMenu span{
+        position:absolute;
+    }
+
+    #bgPic {
+        position:relative;
+        transform: translate3d(0px, -126.75px, 0px);
+        transition: none;
+        top:200px;
+        margin:0 auto;
+        background-image: url("static/img/parallax_01.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size:auto;
+        height:745px;
+        
+    }
+
+    #picCover{
+        opacity:0.7;
+        height:715px;
+        background-color:#363535;
+    }
+
+
+    #bgPic h1{
+        opacity:1;
+        color:white;
+        font-size:45px;
+        
+    }
+    #bgPic div{
+        padding-top:30px;
+    }
+
+    #picInfo{
+        position:absolute;
+        top:35px;
+        text-align:center;
+    }
+
+    #picInfo h1{
+        font-size:55px;
+    }
+
+    #picInfo .bookRide{
+        border:none;
+        position:absolute;
+        top:331px;
+        left:15px;
+        background-color:indianred;
+        color:white;
+        height:62px;
+        width:150px;
+        font-size:16px;
+        -webkit-transition: width 0.2s;
+        transition: width 0.2s;
+    }
+
+    #picInfo .bookRide:hover{
+        cursor:pointer;
+        width:210px;
+    }
+
+    #picInfo .bookRideico{
+        position:absolute;
+        top:331px;
+        left:165px;
+        background-color:#9E9E9E;
+        height:32px;
+        width:60px;
+        font-size:16px;
+        -webkit-transition: opacity 0.2s;
+        transition: opacity 0.2s;
+    }
+
+    #picInfo .bookRide:hover + .bookRideico{
+        opacity:0;
+    }
+    
+    #picInfo .callBack{
+        border:none;
+        position:absolute;
+        top:331px;
+        left:390px;
+        background-color:white;
+        color:black;
+        height:62px;
+        width:150px;
+        font-size:16px;
+        -webkit-transition: width 0.2s;
+        transition: width 0.2s;
+    }
+
+    #picInfo .callBack:hover{
+        cursor:pointer;
+        width:210px;
+    }
+
+    #picInfo .callbackico{
+        position:absolute;
+        top:331px;
+        left:540px;
+        background-color:#9E9E9E;
+        height:32px;
+        width:60px;
+        font-size:16px;
+        -webkit-transition: opacity 0.2s;
+        transition: opacity 0.2s;
+    }
+
+    #picInfo .callBack:hover + .callbackico{
+        opacity:0;
+    }
+
+    #bgPic2 {
+        background-color: rgb(231, 76, 60);
+        height:460px;
+        background-image: url("static/img/bgimg1.png");
+    }
+    
+    #bgPic2 p{
+        position:relative;  
+        top:40px;
+        left:1px;
+        font-size:27px;
+        color:white;
+
+    }
+
+    #timeIco{
+        position:relative;
+        top:368px;
+        left:19%;
+        background-color:#9E9E9E;
+        border-radius: 50%;
+        width: 90px;
+        height: 90px; 
+
+    }
+
+    #timeIco.animation{
+        -webkit-animation-name: time; /* Chrome, Safari, Opera */
+        -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
+        animation-name: time;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    @-webkit-keyframes time{
+        100% {top:140px;}
+    }
+
+    @-moz-keyframes time{
+        100% {top:140px;}
+    }
+
+    #priceIco{
+        position:relative;
+        top:278px;
+        left:38%;
+        background-color:#9E9E9E;
+        border-radius: 50%;
+        width: 90px;
+        height: 90px; 
+    }
+
+    #priceIco.animation{
+        -webkit-animation-name: price; /* Chrome, Safari, Opera */
+        -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
+        animation-name: price;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    @-webkit-keyframes price{
+        100% {top:50px;}
+    }
+
+    @-moz-keyframes price{
+        100% {top:50px;}
+    }
+
+    #itemIco{
+        position:relative;
+        top:188px;
+        left:57%;
+        background-color:#9E9E9E;
+        border-radius: 50%;
+        width: 90px;
+        height: 90px; 
+
+    }
+
+    #itemIco.animation{
+        -webkit-animation-name: item; /* Chrome, Safari, Opera */
+        -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
+        animation-name: item;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    @-webkit-keyframes item{
+        100% {top:-40px;}
+    }
+
+
+    @-moz-keyframes item{
+        100% {top:-40px;}
+    }
+
+     #phoneIco{
+        position:relative;
+        top:98px;
+        left:76%;
+        background-color:#9E9E9E;
+        border-radius: 50%;
+        width: 90px;
+        height: 90px; 
+    }
+
+    #phoneIco.animation{
+        -webkit-animation-name: phone; /* Chrome, Safari, Opera */
+        -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
+        animation-name: phone;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    @-webkit-keyframes phone{
+        100% {top:-130px;}
+    }
+
+    @-moz-keyframes phone{
+        100% {top:-130px;}
+    }
+    
+    #locationBg{
+        height:688px;
+        width:100%;
+        background-color:#ECECEC;
+    }
+
+    #bot1{
+        width:100%;
+        background-color: rgb(231, 76, 60);
+        height:90px;
+        text-align:center;
+    }
+    #bot1 h1{
+        position:absolute;
+        color:white;
+    }
+
+    #bot2{
+        position:relative;
+        width:100%;
+        background-color: #363434;  
+        height:230px;
+    }
+
+    #bot3{
+        width:100%;
+        background-color: black;  
+        height:50px;
+    }
+
+    #bot3 h5{
+        position:relative;
+        padding-top:20px;
+        margin-top:-5px;
+        margin-bottom:-5px;
+        color:#A6A5A5;
+    }
+
+    #bot3 a{
+        color:#A6A5A5;
+    }
+
+    #bot3 a:hover{
+        color: rgb(231, 76, 60);
+    }
+
+    #locationInfo{
+        position:relative;
+        top:23px;
+        width: 409px;
+        height: 140px;
+        padding: 50px;
+        border:1px solid #ccc!important;
+        margin-bottom:-245px;
+    }
+
+    #locationInfo:hover{
+        position:relative;
+        top:23px;
+        width: 409px;
+        height: 140px;
+        padding: 50px;
+        color:white;
+        background-color:#e76b5c;
+        border: 1px solid white;
+        margin-bottom:-245px;
+    }
+
+    #locationInfo p{
+        padding-left:10px;
+        margin-left:-40px;
+        margin-bottom:-40px;
+        padding-top:10px;
+    }
+
+    #locationInfo span{
+        padding-right:0px;
+        margin-bottom:-200px;
+        margin-top:24px;
+        float:right;
+    }
+
+    #stepField{
+        position:absolute;
+        background-color:#e9f0f7;
+        top:5px;
+        right:15px;
+        height:260px;
+        width:237px;
+        text-align:center;
+    }
+
+    .finishStep{
+        background-color:#E56D1A;
+        font-size:20px;
+        border-size:3px;
+        border-style: solid;
+        border-color:#E56D1A;
+        position:relative;
+        color:white;
+        height:45px;
+        line-height: 45px;
+        margin-top:9px;
+        margin-bottom:5px;
+        vertical-align:middle;
+    }
+
+    .unfinish{
+        position:relative;
+        font-size:20px;
+        border-size:3px;
+        border-style: solid;
+        border-color:#E56D1A;
+        height:45px;
+        line-height: 45px;
+        margin-top:9px;
+        margin-bottom:5px;
+        vertical-align:middle;
+    }
+
+    #resPM{
+        position:absolute;
+        top:140px;
+        left:21px;
+        height:200px;
+        width:600px;
+    }
+
+    #resPM b{
+        position:absolute;
+    }
+    #resPM input{
+        padding-left:5px;
+        position: absolute;
+        width: 120px;
+        height: 25px;
+    }
+
+    #resPM hr{
+        float: left;
+        position: relative;
+        top: 65px;
+        border-top: dotted 1px;
+        left: 0px;
+        width: 550px;
+    }
+
+    #resPM p{
+        position:absolute;
+    }
+
+    #resPM select{
+        position:absolute;
+    }
+
+</style>
+
+
+</head>
+
+<body>
+    <div id="topMenu"><div id="accountField"></div></div>
+    <div id="topNavMenu">
+        <span id="topNavLogo"><img src="static/img/logo.png" height="80px" width="80px" style=""></span>
+        <span id="topNavSign" style="text-align:left;padding-left:20px"><b style="font-size:40px;">Li<b style="color:red">mo</b></b><br><b>Limo Service</b></span>
+        <ul id="topNavMenu">
+            <li id="navFst"><a href="/">HOME</a></li>
+            <li><a href="javascript:toMyaccount()">My Account</a></li>
+            <li><a href="javascript:toResMenu()">Reservation</a></li>
+            <li><a href="/news">NEWS</a></li>
+            <li><a href="/contact">CONTACTS</a></li>
+        </ul>
+        <span id="topNavPhone"></span>
+    </div>
+    <div id="bgPic">
+        <div id="picCover">
+        </div>
+        <div id="picInfo">
+            <h1>We Are Always There</h1>
+            <h1>at Your Service</h1><br>
+            <h1>Or</h1>
+            <button class="bookRide" onclick="toRes()">Book Your Ride</button><div class="bookRideico"><img src="static/img/bookride.png" height="30px" width="30px" style="position:relative;top:-12px;"></div>
+            <button class="callBack">Get A Call Back</button><div class="callbackico"><img src="static/img/call.png" height="30px" width="30px" style="position:relative;top:-12px;"></div>
+        </div>
+    </div>
+    <div id="bgPic2">
+        <div id="timeIco"><img src="static/img/clockico.ico" height="40px" width="40px" style="position:relative;top:25px;left:25px;"><p>Fast & Safe</p></div>
+        <div id="priceIco"><img src="static/img/coin.png" height="40px" width="40px" style="position:relative;top:25px;left:25px;"><p>Best Prices</p></div>
+        <div id="itemIco"><img src="static/img/item.png" height="40px" width="40px" style="position:relative;top:25px;left:25px;"><p>Package Delivery</p></div>
+        <div id="phoneIco"><img src="static/img/phone.png" height="40px" width="40px" style="position:relative;top:25px;left:25px;"><p>Online Booking</p></div>
+    </div>
+    <div id="loginPopUpMenu">
+        <div id="accountMenu" style="display:none;top:200px;opacity:0">
+            <form action="/" method="post" id="signUpAcc"><b style="position:absolute;left:0px;color:indianred">SIGN UP</b>
+                {% raw xsrf_form_html() %}
+                <input type="hidden" name ="postType" value="signup"><img id= 'img1' src="static/img/checked.png" style="top:63px;left:230px">
+                <br><br><br><input type="text" class="inputBox" placeholder="Choose a username" name="username" style="padding-left: 10px" required><br><br>
+                <input type="password" class="inputBox" placeholder="Password" name="password" style="padding-left: 10px;" required><img id= 'img2' src="static/img/checked.png" style="top:117px;left:230px"><br><br>
+                <input type="password" class="inputBox" placeholder="Confirm your passowrd" name="cPassword" style="padding-left: 10px;" required><img id= 'img3' src="static/img/checked.png" style="top:171px;left:230px"><br><br>
+                <input type="email" class="inputBox" placeholder="E-mail Address" name="email" style="padding-left: 10px;" required><img id= 'img4' src="static/img/checked.png" style="top:225px;left:230px"><br><br>
+                <input type="text" class="inputBox" placeholder="First Name" name="fname" style="padding-left: 10px;width:90px;" required>
+                <input type="text" class="inputBox" placeholder="Last Name" name="lname" style="padding-left: 10px;width:90px;" required><br><br>
+                <input type="text" class="inputBox" placeholder="Phone Number" name="phone" style="padding-left: 10px;" required><img id= 'img5' src="static/img/checked.png" style="top:278px;left:230px"><br><br><br>
+                <input type="submit" class="bnt" style="position:absolute;left:89px;width:124px;top:380px" value="Sign up" />
+            </form>
+            <hr size=520 width="1" color="#BFBFBF">
+            <form action="/" method="post" id="loginAcc"><b style="position:absolute;left:0px;color:indianred"><LOG></LOG>LOG IN</b>
+                {% raw xsrf_form_html() %}
+                <input type="hidden" name ="postType" value="login">
+                <br><br><br><input type="text" class="inputBox" name="username" placeholder="Username" style="padding-left: 10px;" required><br><br>
+                <input type="password" class="inputBox" name="password" placeholder="Password" style="padding-left: 10px;" required><br><br>
+                <input type="submit" class="bnt" style="position:absolute;left:89px;top:380px;width:124px" value="Log In" />
+            </form>
+        </div>
+    </div>
+
+
+    <div id="popUpMenu"> 
+        <div id ="resField" style="display:none;opacity:0">
+            <b style="position:relative;left:20px;top:15px;color:indianred;font-size:26px">Reserve Your Car Service Today!:</b>
+                <div id="resInfo" style="display:block">
+                    <b class="resField-title" style="top:70px;left:17px">Departure Address: </b>
+                    <b class="resField-title" style="top:135px;left:17px">Destination Address: </b>
+                    <b class="resField-title" style="top:200px;left:17px">Date: </b>
+                    <b class="resField-title" style="top:200px;left:300px">Car Size: </b>
+                    <b class="resField-title" style="top:200px;left:470px">Customer Number: </b>
+                    <b class="resField-title" style="top:265px;left:17px">Time: </b>
+                    <b class="resField-title" style="top:265px;left:300px">Price: $</b>
+                    <p class="resField-title" id="destLabel" style="top:120px;left:195px;color:red"></p>
+                    <p class="resField-title" id="deptLabel" style="top:55px;left:195px;color:red"></p>
+                    <p class="resField-title" name="fareAmount" style="top:250px;left:380px;"></p>
+                    
+                    <select name="mm" class="dateSelects" style="top:200px;left:90px" onchange="getMonthDay()"></select>
+                    <select name="dd" class="dateSelects" style="top:200px;left:155px"></select>
+                    <select name="yyyy" class="dateSelects" style="top:200px;left:210px">
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                    <select name="hrs" class="dateSelects" style="top:265px;left:90px"></select>
+                    <span style="position:absolute;top:265px;left:142px">:</span>
+                    <select name="mins" class="dateSelects" style="top:265px;left:155px"></select>
+                    <a href="javascript:getCurTime();" style="position:absolute;top:263px;left:220px;color:indianred;">Now</a>
+                    <select id="carSize" class="dateSelects" style="top:200px;left:380px" onchange="numSizeChk()">
+                            <option value="SD">Sedan</option>
+                            <option value="SUV">Suv</option>   
+                            <option value="VN">Van</option>  
+                    </select>
+                    <select id="custNum" class="dateSelects" style="top:200px;left:630px" onchange="numSizeChk()">
+                            <option value="1">1</option>
+                            <option value="2">2</option>   
+                            <option value="3">3</option>  
+                            <option value="4">4</option>
+                            <option value="5">5</option>   
+                            <option value="6">6</option> 
+                    </select>
+                </div>
+                <div id="resLogin" style="display:none">
+                    <input class="inputBox" type="text" required placeholder="Username" style="position:absolute;padding-left:10px;top:70px;left:30px;width:260px" id="unFromRes">
+                    <input class="inputBox" type="password" required placeholder="Password" style="position:absolute;padding-left:10px;top:120px;left:30px;width:260px" id="pwFromRes">
+                    <button type="submit" class="bnt" onclick="loginFromRes()" style="position:absolute;top:170px;left:222px;padding: 5px 10px;width:80px;">Login</button> 
+                    <p style="position:absolute;color:red;top:210px;left:30px"><strong>Please login in to reserve a car!</strong></p>
+                    <p style="position:absolute;color:red;top:240px;left:145px"><strong>Or</strong></p>
+                    <a href="javascript:loginSignUpSwitch()"><p style="position:absolute;color:red;top:270px;left:80px"><strong>Sign up in seconds!</strong></p></a>
+                </div>
+                <div id="resSignUp" style="display:none">
+                    <input class="inputBox" type="text" placeholder="Username" required style="position:absolute;padding-left:10px;top:70px;left:30px;width:160px" id="signUpUn">
+                    <input class="inputBox" type="password" placeholder="Password" required style="position:absolute;padding-left:10px;top:120px;left:30px;width:160px" id="signUpPw">
+                    <input class="inputBox" type="password" placeholder="Confirm Password" required style="position:absolute;padding-left:10px;top:170px;left:30px;width:160px" id="signUpCPw">
+                    <input class="inputBox" type="text" placeholder="First Name" required style="position:absolute;padding-left:10px;top:70px;left:230px;width:80px" id="signUpFName">
+                    <input class="inputBox" type="text" placeholder="Last Name" required style="position:absolute;padding-left:10px;top:70px;left:330px;width:80px" id="signUpLName">
+                    <input class="inputBox" type="email" placeholder="E-mail" required style="position:absolute;padding-left:10px;top:170px;left:230px;width:180px" id="signUpEmail">
+                    <input class="inputBox" type="text" placeholder="Phone Number" required style="position:absolute;padding-left:10px;top:120px;left:230px;width:180px" id="signUpPhone">
+                    <p style="position:absolute;color:red;top:210px;left:30px">Already Have An Account?</p>
+                    <a href="javascript:loginSignUpSwitch()"><p style="position:absolute;color:red;top:250px;left:30px"><strong>Click Here To Login In!</strong></p></a>
+                    <button class="bnt" onclick="signUpFromRes()" style="position:absolute;top:220px;left:341px;padding: 5px 10px;width:80px;">Sign Up</button> 
+                </div>
+                <div id="resPay" style="display:none">
+                    <b class="resField-title" style="top:70px;left:21px">Fare:</b>
+                    <b class="resField-title" style="top:110px;left:21px">Balance:</b>
+                    <b class="resField-title" name="fareAmount" style="top:70px;left:100px;"></b>
+                    <b class="resField-title" id="balanceAmount" style="top:110px;left:100px;"></b>
+                    <form>
+                        <input type="radio" id="balancePay" style="position:absolute;top:70px;left:300px;"  onclick="resPayOpts(this.id)"><strong style="position:absolute;top:70px;left:330px;">Pay With Your Balnce:</strong>
+                        <input type="radio" id="cardsPay" style="position:absolute;top:110px;left:300px;" checked onclick="resPayOpts(this.id)"><strong style="position:absolute;top:110px;left:330px;">Pay With Credit Card/Paypal:</strong>
+                    </form>
+                    
+                </div>
+                <div id="resPM" style="display:none">
+                    <b style="top:0px;left:0px;font-size:10px;">Contact Info</b>
+                    <input type="text" style="top:28px;left:0px;" placeholder="First Name">
+                    <input type="text" style="top:28px;left:150px;" placeholder="Last Name">
+                    <input type="text" style="top:28px;left:300px;width:240px;" placeholder="E-mail">
+                    <hr>
+                    <b style="top:88px;left:0px;font-size:10px;">Billing Info</b>
+                    <input type="text" style="top:118px;left:0px;width:195px;" placeholder="Credit Card Number">
+                    <input type="text" style="top:118px;left:220px;width:50px;" placeholder="CSV">
+                    <p style="top:160px;left:0px;font-size:10px;">Exp. Date</p>
+                        <SELECT style="top:170px;left:70px;">
+                            <option>01 - January</option>
+                            <option>02 - February</option>
+                            <option>03 - March</option>
+                            <option>04 - April</option>
+                            <option>05 - May</option>
+                            <option>06 - June</option>   
+                            <option>07 - July</option>
+                            <option>08 - August</option>
+                            <option>09 - September</option>
+                            <option>10 - Octobor</option>
+                            <option>11 - November</option>
+                            <option>12 - December</option>
+                        </SELECT>
+
+                        <SELECT style="top:170px;left:200px;">
+                            <option>2016</option>
+                            <option>2017</option>
+                            <option>2018</option>
+                            <option>2019</option>
+                            <option>2020</option>
+                            <option>2021</option>   
+                            <option>2022</option>
+                            <option>2023</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                            <option>2026</option>
+                        </SELECT>
+                    <input type="text" style="top:118px;left:300px;width:70px;" placeholder="ZIP Code">
+                </div>
+                <div id="stepField" style="display:none">
+                    <p class="finishStep" id="resInfoStep">Reservation Info</p>
+                    <img width="35px" height="35px;" src="static/img/downarrow.png">
+                    <p class="unfinish" id="accLoginStep">Account Login</p>
+                    <img width="35px" height="35px;" src="static/img/downarrow.png">
+                    <p class="unfinish">Payment</p>
+                </div>
+                <button class="bnt" id="nxtBnt" onclick="resNxtChk()"  style="position:absolute;top:280px;left:645px">NEXT</button> 
+                <button class="bnt" id= "cancelBnt" onclick="closeResMenu()" style="position:absolute;top:280px;left:770px">CANCEL</button>
+            </div>
+    </div>
+    
+    <div id="locationBg">
+        <div id="locationField" style="position:absolute;width:480px">
+            <h1>Reserve Your Trip Today!</h1><br>
+            <input id="depAddress" name="dept" placeholder="Enter your departure address" type="text" class="addressInput"></input>
+            <br><br>
+            <input id="destAddress" name = "dest" placeholder="Enter your destination address" type="text" class="addressInput"></input><br><br>
+            <div><button class="bnt" onclick="printPriceInfo()">Check</button>  <button class="bnt" onclick="getAddress()">Reserve</button></div>
+        </div>
+        <div id="locationInfo">
+            <h3 style="margin-top:-40px;margin-left:-40px;padding-left:10px;">Price Info:</h3><span id="rate" style="position:relative;top:-56px;display:none;font-size:12px;">*Fare Rate: $2.75/Mile</span>
+            <p>Estimated Trip Distance: </p><span id="tDistance"></span><br><br>
+            <p>Estimated Trip Duration: </p><span id="tDuration"></span><br><br>
+            <p>Fare Calculation Method: </p><span id="tMethod"></span><br><br>
+            <p>Estimated Fare: </p><span id="tPrice"></span>
+
+        </div>
+        <br><br>
+        <div id="map" class="map"></div>
+        <br><br>
+    </div>
+    <div id="bot1"><img id= "bot2Ico" src="static/img/botH.png" width="60px" height="60px" style="position:absolute;top:2065px;"><h1 id="bot1h1">Need Any Help? CALL NOW! +1 800 666 6666</h1></div>
+    <div id="bot2">
+        <span id="botLogo" style="position:absolute;top:50px;"><img src="static/img/logo.png" height="80px" width="80px" ></span>
+        <span id="botSign" style="text-align:left;position:absolute;top:63px;"><a href="#"><b style="font-size:40px;">Li<b style="color:red">mo</b></b><br><b>Limo Service</b></a></span>
+    </div>
+    <div id="bot3">
+        <h5 id="bot3H">Copyright 2016 © Limo Service. All rights reserved. Terms of use | <a href="#">Privacy Policy</a></h5>
+    </div>
+
+    
+    <script>
+
+            function getNavPosition(){
+                var uNav = document.getElementById("navFst");
+                var uNavTop = Number(uNav.offsetTop);
+                var uNavLeft = Number(uNav.offsetLeft);
+                var logo = document.getElementById("topNavLogo");
+                var sign = document.getElementById("topNavSign");
+                var picInfo = document.getElementById("picInfo");
+                var locationField = document.getElementById("locationField");
+                var botH1 = document.getElementById("bot1h1");
+                var bot2Ico = document.getElementById("bot2Ico");
+                var botLogo = document.getElementById("botLogo");
+                var botSign = document.getElementById("botSign");
+                var botH5 = document.getElementById("bot3H");
+                var info = document.getElementById("locationInfo");
+                var caledLeft = uNavLeft - 270;
+                var caledTop = uNavTop + 35;
+                logo.style.top = caledTop.toString() + "px";
+                logo.style.left = caledLeft.toString() + "px";
+                sign.style.top = (caledTop + 10).toString() + "px";
+                sign.style.left = (caledLeft + 105).toString() + "px";
+                picInfo.style.left = (caledLeft + 290).toString() + "px";
+                locationField.style.left = (caledLeft + 88).toString() + "px";
+                botH1.style.left = (caledLeft + 215).toString() + "px";
+                bot2Ico.style.left = (caledLeft + 130).toString() + "px";
+                botH5.style.paddingLeft = (caledLeft + 95).toString() + "px";
+                botLogo.style.left = (caledLeft + 90) + "px";
+                botSign.style.left = (caledLeft + 190).toString() + "px";
+                info.style.left = (caledLeft + 580).toString() + "px";
+            }
+
+            function toRes(){
+                window.scrollTo(0, 927);
+                picAniOpen();
+            }
+
+            function picAniOpen(){
+                var a,b,c;
+                var time = document.getElementById("timeIco");
+                var price = document.getElementById("priceIco");
+                var item = document.getElementById("itemIco");
+                var phone = document.getElementById("phoneIco");
+                time.classList.add("animation");
+    	        a = setInterval(function(){ price.classList.add('animation'); 
+                b = setInterval(function(){ item.classList.add('animation'); 
+                c = setInterval(function(){ phone.classList.add('animation'); clearInterval(a); clearInterval(b); clearInterval(c);}, 300);
+                },300);
+                }, 300);
+            }
+
+            window.addEventListener('scroll', function(e) {
+            	if (window.scrollY > 426){
+                    picAniOpen();
+                }
+            });
+
+            var zoneNum = 0;
+            var polyList = new Object;
+            var areaCoords = new Array();
+            var directionsService;
+            var directionsDisplay;
+            var map,path;
+            var getDeparture;
+            var getDestination;
+            var areaList = {%raw mapData%};
+            var _xsrf = getCookie("_xsrf");
+            var username = "{{userName}}";
+            var status = "{{status}}";
+
+            function getCookie(name) {
+                var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+                return r ? r[1] : undefined;
+            }
+
+            function openLogin(){
+                 if (document.getElementById("accountMenu").style.display == "none"){
+                    document.getElementById("accountMenu").style.display="block";
+                    document.getElementById("bodyMask").style.display ="block";
+                    document.getElementById("topMenu").style.backgroundColor = "#3E3E3E";
+                    var moveLogin = setInterval(function(){
+                        var px = document.getElementById("accountMenu").style.top;
+                        var value = Number(px.slice(0, -2));
+                        value += 25;
+                        var pxValue = value.toString() + "px";
+                        document.getElementById("accountMenu").style.top = pxValue;
+                        var opacityValue = Number(document.getElementById("accountMenu").style.opacity);
+                        opacityValue += 0.125;
+                        document.getElementById("accountMenu").style.opacity = opacityValue.toString();
+                        if (document.getElementById("accountMenu").style.top === "400px") clearInterval(moveLogin);
+                    },30);
+                    
+
+                 } else{
+                     closeLogin();
+                 }
+                 
+            }
+
+            function getUser(){
+                //get top-right user tag 
+                var accountField = document.getElementById("accountField");
+                if (status == "None"){
+                    accountField.innerHTML = "Want to reserve a car? <a href='javascript:openLogin()' style='color:red'>Login in or sign up</a> in seconds.";
+                }else if (status == "un"){
+                    accountField.innerHTML = "Want to reserve a car? <a href='javascript:openLogin()' style='color:red'>Login in or sign up</a> in seconds.";
+                    alert("Invalid Username");
+                }else if (status == "pw"){
+                    accountField.innerHTML = "Want to reserve a car? <a href='javascript:openLogin()' style='color:red'>Login in or sign up</a> in seconds.";
+                    alert("Invalid Password");
+                }else if (status == "ok"){
+                    accountField.innerHTML = "Welcome " + username + "    |    <a href='/'><img src='/static/img/homepage.png' style='width:18px;height:18px'></a>    |    <a href='/cp'><img src='/static/img/cp.ico' style='width:18px;height:18px'></a>     |    <a href='/logout'><img src='/static/img/logout.png' style='width:18px;height:18px'></a>";
+                }else{
+                    alert("{{status}}");
+                }
+
+
+            }
+            
+            function resNxtChk(){
+
+                var resInfo = document.getElementById("resInfo");
+                var resLogin = document.getElementById("resLogin");
+                var resSign = document.getElementById("resSignUp");
+                var resPay = document.getElementById("resPay");
+                var stepField = document.getElementById("stepField");
+
+                if (resInfo.style.display == "block" && username == "None"){
+                    resInfo.style.display = "none";
+                    resLogin.style.display = "block";
+                    document.getElementById("nxtBnt").innerHTML = "Back";
+                    stepField.style.display = "block";
+                }else if (resInfo.style.display == "block" && username != "None"){
+                    document.getElementById("resInfo").style.display = "none";
+                    stepField.style.display = "block";
+                    document.getElementById("accLoginStep").className = "finishStep";
+                    openResPay();
+                }else if (resPay.style.display == "block"){
+                    resPay.style.display = "none";
+                    resInfo.style.display = "block";
+                    stepField.style.display = "none";
+                    document.getElementById("balancePay").checked = false;
+                    document.getElementById("cardsPay").checked = true;
+                    document.getElementById("resPM").style.display = "none";
+                    document.getElementById("accLoginStep").className = "unfinish";
+                    document.getElementById("cancelBnt").innerHTML = "Cancel";
+                    document.getElementById("cancelBnt").onclick = function(){closeResMenu();};
+                    document.getElementById("nxtBnt").innerHTML = "Next";
+                    
+                }else if ((resLogin.style.display == "block" && username == "None") || (resSign.style.display == "block" && username == "None")){
+                    resSign.style.display = "none";
+                    resLogin.style.display = "none";
+                    resInfo.style.display = "block";
+                    stepField.style.display = "none";
+                    document.getElementById("accLoginStep").className = "unfinish";
+                    document.getElementById("nxtBnt").innerHTML = "Next";
+                }else if ((resSign.style.display == "block" && username != "None") || (resLogin.style.display == "block" && username != "None")){
+                    resSign.style.display = "none";
+                    resLogin.style.display = "none";
+                    document.getElementById("accLoginStep").className = "finishStep";
+                    openResPay();
+                }
+
+                function openResPay(){ //inner function
+                    resPay.style.display = "block";
+                    document.getElementById("resPM").style.display = "block";
+                    document.getElementById("cancelBnt").innerHTML = "Sumbit";
+                    document.getElementById("nxtBnt").style.display = "block";
+                    document.getElementById("nxtBnt").innerHTML = "Back";
+                    document.getElementById("cancelBnt").onclick = function(){sumbitOrder();};
+                    if (document.getElementById("balanceAmount").innerHTML == ""){
+                        // preventing repeatedly post to server
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {
+                            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                                var balance = (xhttp.responseText != "null") ? (JSON.parse(xhttp.responseText))["BALANCE"].toString():"0";
+                                document.getElementById("balanceAmount").innerHTML = "$ " + balance; 
+                                document.getElementById("balancePay").disabled = (Number(balance) < Number(document.getElementsByName("fareAmount")[0].textContent)) ? true:false;
+                            }
+                        };
+                        
+                        xhttp.open("post", "/", true);
+                        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xhttp.send('_xsrf=' + _xsrf + "&postType=getBalance&un=" + username);
+                    }
+                }
+
+            }
+
+            function resPayOpts(clickID){
+                var balancePay = document.getElementById("balancePay");
+                var cardsPay = document.getElementById("cardsPay");
+                if (balancePay.disabled != true){
+                    if (clickID == "balancePay"){
+                        balancePay.checked = true;
+                        cardsPay.checked = false;
+                        document.getElementById("resPM").style.display = "none";
+                    }else if (clickID == "cardsPay"){
+                        balancePay.checked = false;
+                        cardsPay.checked = true;
+                        document.getElementById("resPM").style.display = "block";
+                    }
+                }
+            }
+
+            function sumbitOrder(){
+                var destAddress = document.getElementById("destAddress").value;
+                var deptAddress = document.getElementById("depAddress").value;
+                var d = document.getElementsByName("dd")[0];
+                var y = document.getElementsByName("yyyy")[0];
+                var m = document.getElementsByName("mm")[0];
+                var date = y.options[y.selectedIndex].value + m.options[m.selectedIndex].value + d.options[d.selectedIndex].value;
+
+                var hr = document.getElementsByName("hrs")[0];
+                var min = document.getElementsByName("mins")[0];
+                var time = hr.options[hr.selectedIndex].value + min.options[min.selectedIndex].value;
+                var carSize = document.getElementById("carSize").options[document.getElementById("carSize").selectedIndex].value;
+                var price =  document.getElementsByName("fareAmount")[0].textContent;
+                var custNum =  document.getElementById("custNum").options[document.getElementById("custNum").selectedIndex].value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == "ok"){
+                            alert("The Reservation Has Been Submmited, A Confirmation E-mail Will Be Sent To Your E-mail Address Shortly.");
+                            closeResMenu();
+                        }
+                    }
+                };
+                if (confirm("Sumbit The Reservation?")){
+                    xhttp.open("post", "", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send('_xsrf=' + _xsrf + "&postType=submitRes&un=" + username + "&dest=" + destAddress + "&dept=" + deptAddress + "&date=" + date + "&time=" + time + "&size=" + carSize + "&price="  + price + "&num=" + custNum);
+                }
+
+            }
+
+            function loginFromRes(){
+                var un = document.getElementById("unFromRes").value;
+                var pw = document.getElementById("pwFromRes").value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        status = xhttp.responseText;
+                        if (status == "ok"){
+                            username = un;
+                            getUser();
+                            resNxtChk();
+                        }else{
+                        }
+                    }
+                };
+
+                xhttp.open("post", "/", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=loginFromRes&un=" + un + "&pw=" + pw);
+            }
+
+            function loginSignUpSwitch(){
+                if (document.getElementById("resLogin").style.display == "block"){
+                    document.getElementById("resLogin").style.display = "none";
+                    document.getElementById("resSignUp").style.display = "block";
+                }else if (document.getElementById("resSignUp").style.display == "block"){
+                    document.getElementById("resSignUp").style.display = "none";
+                    document.getElementById("resLogin").style.display = "block";
+                }
+            }
+
+            function signUpFromRes(){
+                var un = document.getElementById("signUpUn").value;
+                var pw = document.getElementById("signUpPw").value;
+                var cpw = document.getElementById("signUpCPw").value;
+                var lname = document.getElementById("signUpLName").value;
+                var fname = document.getElementById("signUpFName").value;
+                var phone = document.getElementById("signUpPhone").value;
+                var email = document.getElementById("signUpEmail").value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        status = xhttp.responseText;
+                        if (status == "ok"){
+                            username = un;
+                            getUser();
+                            resNxtChk();
+                        }else{
+                            alert(status);
+                        }
+                    }
+                };
+
+                xhttp.open("post", "/", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=signUpFromRes&un=" + un + "&pw=" + pw + "&cpw=" + cpw + "&lname=" + lname + "&fname=" + fname + "&phone=" + phone + "&email=" + email);
+            }
+
+            function getAddress(){
+                var dept = document.getElementsByName("dept")[0];
+                var dest = document.getElementsByName("dest")[0];
+                if (dept.value == ""){
+                    alert("Please Enter Your Departure Address!");
+                }else if(dest.value == ""){
+                    alert("Please Enter Your Destination Address!");
+                }else{
+                    openResMenu();
+                    var destLabel = document.getElementById("destLabel");
+                    var deptLabel = document.getElementById("deptLabel");
+                    destLabel.innerHTML = dest.value;
+                    deptLabel.innerHTML = dept.value;
+                }
+            }
+
+            function getTime(){
+                var mins = document.getElementsByName("mins")[0];
+                var hours = document.getElementsByName('hrs')[0]; 
+                if (hours.length ==0){
+                    //load time only if the select box is empty
+                    for (var i = 0;i < 24;i++){
+                        var hrCreate = document.createElement("option");
+                        var minCreate = document.createElement("option");
+                        if (i < 10){
+                            var timeValue = "0" + i.toString();
+                            hrCreate.text = timeValue;
+                            hrCreate.value = timeValue;
+                            hours.add(hrCreate);
+                        }else{
+                            hrCreate.text = i.toString();
+                            hrCreate.value = i.toString();
+                            hours.add(hrCreate);
+                        }
+                    }
+
+                    for (var i = 0;i < 61;i++){
+                        var minCreate = document.createElement("option");
+                        if (i < 10){
+                            var timeValue = "0" + i.toString();
+                            minCreate.text = timeValue;
+                            minCreate.value = timeValue;
+                            mins.add(minCreate);
+                        }else{
+                            minCreate.text = i.toString();
+                            minCreate.value = i.toString();
+                            mins.add(minCreate);
+                        }
+                    }
+                }
+            }
+
+            function getMonth(){
+                var months = {
+                    "01":"JAN",
+                    "02":"FEB",
+                    "03":"MAR",
+                    "04":"APR",
+                    "05":"MAY",
+                    "06":"JUN",
+                    "07":"JUL",
+                    "08":"AUG",
+                    "09":"SEP",
+                    "10":"OCT",
+                    "11":"SEP",
+                    "12":"DEC"
+                }
+
+                var month = document.getElementsByName("mm")[0];
+                if (month.length == 0){
+                    //load months only if the select box is empty
+                    for (var i = 1;i < 13;i++){
+                        var c = document.createElement("option");
+                        if (i < 10){
+                            var monthValue = "0" + i.toString();
+                            c.text = months[monthValue];
+                            c.value = monthValue;
+                            month.add(c);
+                        }else{
+                            c.text = months[i.toString()];
+                            c.value = i.toString();
+                            month.add(c);
+                        }
+                    }
+                    getMonthDay();
+                }
+            }
+
+            function getMonthDay(){
+                var month = document.getElementsByName("mm")[0];
+                var days = document.getElementsByName("dd")[0];
+                days.length = 0;
+                var dayNum;
+                var monthDays = {
+                    "31":["01","03","05","07","08","10","12"],
+                    "30":["04","06","09","11"],
+                    "29":["02"]
+                }
+                for (var day in monthDays){
+                    if (monthDays[day].indexOf(month.value) >= 0){
+                        dayNum = day;
+                        break;
+                    }
+                }
+                
+                for (var i = 1;i<=Number(dayNum);i++){
+                    var c = document.createElement("option");
+                    if (i < 10){
+                        var day = "0" + i.toString();
+                        c.text = day;
+                        c.value = day;
+                        days.add(c);
+                    }else{
+                        c.text = i.toString();
+                        c.value = i.toString();
+                        days.add(c);
+                    }
+                }
+            }
+
+            function getCurTime(){
+                var currentTime = new Date();
+                var year = document.getElementsByName("yyyy")[0];
+                var mins = document.getElementsByName("mins")[0];
+                var hours = document.getElementsByName('hrs')[0]; 
+                var month = document.getElementsByName("mm")[0];
+                var days = document.getElementsByName("dd")[0];
+                year.selectedIndex = 0;
+                month.selectedIndex = currentTime.getMonth();
+                getMonthDay();
+                days.selectedIndex = currentTime.getDate() -1;
+                mins.selectedIndex = currentTime.getMinutes();
+                hours.selectedIndex = currentTime.getHours();
+
+            }
+
+            function numSizeChk(){
+                //check passenger number and car size
+                var custNum = document.getElementsByName("custNum")[0];
+                var carSize = document.getElementsByName("carSize")[0];
+                var num = custNum.value;
+                if (num > 4 && carSize.value == "SD"){
+                    custNum.text = "4";
+                    custNum.value = "04";
+                    carSize.text = "Sedan";
+                    carSize.value = "SD";
+                    alert("Sedan can only afford 4 passengers");
+                }else if (num > 4 && carSize.value == "SUV"){
+                    custNum.text = "4";
+                    custNum.value = "04";
+                    carSize.text = "Suv";
+                    carSize.value = "SUV";
+                    alert("Suv can only afford 4 passengers");
+                }
+
+            }
+
+            function closeLogin(){
+                //close login menu
+                if (document.getElementById("accountMenu").style.top === "400px"){
+                    var moveLogin = setInterval(function(){
+                        var px = document.getElementById("accountMenu").style.top;
+                        var value = Number(px.slice(0, -2));
+                        value -= 25;
+                        var pxValue = value.toString() + "px";
+                        document.getElementById("accountMenu").style.top = pxValue;
+                        var opacityValue = Number(document.getElementById("accountMenu").style.opacity);
+                        opacityValue -= 0.125;
+                        document.getElementById("accountMenu").style.opacity = opacityValue.toString();
+                    if (document.getElementById("accountMenu").style.top === "200px") {
+                        clearInterval(moveLogin)
+                        document.getElementById("topMenu").style.backgroundColor = "gray";
+                        document.getElementById("bodyMask").style.display ="none";
+                        document.getElementById("accountMenu").style.display="none";
+                    }
+                    },30);
+                }
+            }
+
+            function openResMenu(){
+                if (document.getElementById("resField").style.display == "none"){
+                    document.getElementById("resField").style.display="block";
+                    document.getElementById("bodyMask").style.display ="block";
+                    document.getElementById("topMenu").style.backgroundColor = "#3E3E3E";
+
+                    var moveLogin = setInterval(function(){
+                        var opacityValue = Number(document.getElementById("resField").style.opacity);
+                        opacityValue += 0.125;
+                        document.getElementById("resField").style.opacity = opacityValue.toString();
+                        if (document.getElementById("resField").style.opacity == "1") clearInterval(moveLogin);
+                    },30);
+                 } else{
+                     closeResMenu();
+                 }
+                 getRoute();
+                 getMonth();
+                 getTime();
+            }
+
+            function closeResMenu(){
+                
+                if (document.getElementById("resField").style.opacity == "1"){
+                    var moveLogin = setInterval(function(){
+                        var opacityValue = Number(document.getElementById("resField").style.opacity);
+                        opacityValue -= 0.125;
+                        document.getElementById("resField").style.opacity = opacityValue.toString();
+                    if (document.getElementById("resField").style.opacity == "0") {
+                        clearInterval(moveLogin);
+                        document.getElementById("bodyMask").style.display = "none";
+                        document.getElementById("resField").style.display= "none";
+                        document.getElementById("topMenu").style.backgroundColor = "gray";
+                    }
+                    },30);
+                }      
+  
+            }
+            
+            function menuField(){
+                closeResMenu();
+                closeLogin();
+            }
+
+            function initMap() {
+                getNavPosition();
+                loadAreaInfo();
+                getUser()
+                directionsService = new google.maps.DirectionsService;
+                directionsDisplay = new google.maps.DirectionsRenderer;
+                map = new google.maps.Map(document.getElementById('map'), {
+                    //initializing google map
+                     center: {lat: 40.740160, lng: -73.983363},
+                     zoom: 14
+                 });
+                directionsDisplay.setMap(map);
+                getDeparture = new google.maps.places.Autocomplete
+                 (
+                      (document.getElementById('depAddress')),
+                      {types: ['address']}
+                  );
+
+                getDestination = new google.maps.places.Autocomplete
+                 (
+                      (document.getElementById('destAddress')),
+                      {types: ['address']}
+                  );
+            }
+            
+            function printPriceInfo(){
+                getRoute();
+            }
+
+            function getRoute() {
+                var price,setting,distance;
+                var deptPlace = getDeparture.getPlace()
+                var destPlace = getDestination.getPlace()
+                var deptLatLng = new google.maps.LatLng(Number(deptPlace.geometry.location.lat()), Number(deptPlace.geometry.location.lng()));
+                var destLatLng = new google.maps.LatLng(Number(destPlace.geometry.location.lat()), Number(destPlace.geometry.location.lng()));
+                var deptAreaCode,destAreaCode;
+                directionsService.route({
+                    origin: {'placeId': deptPlace.place_id},
+                    destination: {'placeId': destPlace.place_id},
+                    travelMode: google.maps.TravelMode.DRIVING
+                }, function(response, st) {
+                    if (st === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response)
+                    } else {
+                    window.alert('Directions request failed due to ' + st);
+                    }
+                }); //get direction
+
+                var service = new google.maps.DistanceMatrixService();
+                service.getDistanceMatrix(
+                {
+                    origins:[deptLatLng],
+                    destinations:[destLatLng],
+                    travelMode: 'DRIVING'
+                     }, function(response, st) {
+                    if (st === google.maps.DistanceMatrixStatus.OK) {
+                        distance = (Number(response.rows[0].elements[0].distance.value) * 0.000621371).toFixed(2);
+                        document.getElementById('tDuration').innerHTML = response.rows[0].elements[0].duration.text;
+                   	    document.getElementById('tDistance').innerHTML = distance.toString() + " Miles"
+                    } else {
+                    window.alert('Directions request failed due to ' + st);}
+                });
+
+                for (var i = 1; i< Object.keys(polyList).length+1;i++){
+                    if (google.maps.geometry.poly.containsLocation(deptPlace.geometry.location,polyList[i.toString()])){
+                        deptAreaCode = i.toString();
+                    }
+                    if (google.maps.geometry.poly.containsLocation(destPlace.geometry.location,polyList[i.toString()])){
+                        destAreaCode = i.toString();
+                    }
+                } //get area code
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        var areaPrice = JSON.parse(xhttp.responseText) || {PRICE:"6",SETTING:"D"};
+                        var getPrice = areaPrice["PRICE"].split(",");
+                        var getSetting = areaPrice["SETTING"].split(",");
+                        price = getPrice[destAreaCode-1] || "6";
+                        setting = getSetting[destAreaCode-1] || "D";
+                        if (setting == "A"){
+                            document.getElementById('rate').style.display = "none";
+                            document.getElementById('tPrice').innerHTML = "$ " + price;
+                            document.getElementById('tMethod').innerHTML = "Area";
+                            document.getElementsByName("fareAmount")[0].innerHTML = price;
+                            document.getElementsByName("fareAmount")[1].innerHTML = "$ " + price;
+                        }else if (setting == "D"){
+                            var distancePrice = Number(price) + distance * 2.75;
+                            document.getElementById('rate').style.display = "block";
+                            document.getElementById('tPrice').innerHTML = "$ " + distancePrice.toFixed(2);
+                            document.getElementById('tMethod').innerHTML = "Distance";
+                            document.getElementsByName("fareAmount")[0].innerHTML = distancePrice.toFixed(2);
+                            document.getElementsByName("fareAmount")[1].innerHTML = "$ " + distancePrice.toFixed(2);
+                        }
+                   	    
+
+                    }
+                };
+
+                xhttp.open("post", "/   ", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=chkPrice&deptArea=" + deptAreaCode);
+
+            }
+
+            function loadAreaInfo(){
+                //load area coords
+                if (areaList != "None"){
+                    for (zoneNum = 1;zoneNum <= Object.keys(areaList).length;zoneNum++){
+                        var polyPath = new Array;
+                        var getX = areaList[zoneNum.toString()][0].split(",");
+                        var getY = areaList[zoneNum.toString()][1].split(",");
+                        for (var i = 0;i < getX.length;i++){
+                            var coord = {
+                                lat:Number(getX[i]),lng:Number(getY[i])
+                            };
+                            polyPath.push(coord);
+                        };
+                        var polygon = new google.maps.Polygon({
+                            getNumber:zoneNum.toString(),
+                            paths:polyPath,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 3,
+                            fillColor: '#FF0000',
+                            fillOpacity: 0.35
+                        });
+                        polyList[zoneNum.toString()] = polygon
+                    }
+                }
+            }
+
+        function toMyaccount(){
+            if (username == "None"){
+                openLogin();
+            }else{
+                window.location = window.location.href + "cp";
+            }
+        }
+
+        function toResMenu(){
+            if (username == "None"){
+                openLogin();
+            }else{
+                window.location = window.location.href + "cp-rl";
+            }
+        }
+
+            
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3O0U1rlie1FQ25XPVLllSAuHSUXcwXo&signed_in=true&libraries=places&callback=initMap&language=en-US"
+        async defer></script>
+    
+</body>
+
+</html>

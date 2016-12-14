@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Limo System Control Panel</title>
+<style>
+
+
+    html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td{
+        margin: 0;
+        padding: 0;
+    }
+
+    #accountField{
+        position:absolute;
+        right:20px;
+        top:10px;
+        color: #F7F7F7;
+    }
+
+    .bnt{
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }  
+
+    .selecctBnt{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .bnt:hover{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .submitBnt{
+        position: absolute;
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 110px;
+    }
+
+    .submitBnt:hover{
+        position: absolute;
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 110px;
+    }
+
+    #topMenu{
+        width: 100%;
+        background-color: gray;
+        line-height: 30px;
+        height: 50px;
+    }
+    body{
+        margin:0px;
+        padding:0px;
+    }
+
+    #uNav{        
+        width: 50px;
+        padding-left: 0px;
+    }
+
+    #hNav{
+        position: absolute;
+        width: 700px;
+        height: 35px;
+        line-height: 32px;
+        margin-right: 5px;
+    }
+
+    ul#hNavUl li {
+        display: inline;
+    }
+
+    .mainBody{
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    .f1{
+        width: 210px;
+        height: 50px;
+        font-size: 30px;
+        color: #555;
+        text-align: center;
+    }
+
+    .hNavBnt{  
+        border: none;
+        background:white;
+        color: #ff8f2b;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+
+    }
+    .hNavBnt:hover{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .u_header{
+        height:50px;
+        margin-bottom: 20px;
+        border-bottom: 2px #ebebeb solid;
+    }
+
+    .hSelectBnt{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .arrow{
+        position: absolute;
+        top: 30px;
+        left: 174px;
+        border-color: #fff transparent transparent;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px;
+    }
+
+    #infoPanel{
+        position: absolute;
+        width: 1030px;
+        height: 600px;
+        background-color: #f5f5f5;
+        
+    }
+
+    #infoPanel p{
+        position: absolute;
+    }
+
+    #infoPanel input{
+        padding-left:5px;
+        display: block;
+        position: absolute;
+        width: 120px;
+    }
+
+    #infoPanel b{
+        position: absolute;
+    }
+
+    #infoPanel img{
+        position: absolute;
+        height: 15px;
+        width: 15px;
+    }
+
+    #infoPanel select{
+        position: absolute;
+    }
+
+    #resultPanel select{
+        position: absolute;
+        top: 80px;
+        left: 50px;
+        width: 270px;
+    }
+
+    #resultPanel input{
+        position: absolute;
+        top: -3px;
+        left: 95px;
+        height: 18px;
+    }
+
+</style>
+</head>
+<body onload="divsGetWH();getUser();adminPage()">
+    <div id="topMenu"><div id="accountField"></div></div>
+    <div class="mainBody">
+        <div class="u_header">
+            <h1 class="f1">Control Panel</h1>
+        </div>
+        <div id="uNav">
+            <ul style="list-style-type:none"> 
+                <li><a href="/cp"><button class="bnt">Profile</button></a><hr width="140" align="left"></li>
+                <li><a href="http://www.google.com"><button class="bnt">Messages</button></a><hr width="140" align="left"></li>
+                <li><a href="/cp-rl"><button class="bnt">Reservations</button></a><hr width="140" align="left"></li>
+                <li id="admin" style="display:none"><a href="#"><button class="selecctBnt" >ADMIN</button></a></li><hr width="140" align="left"></li>
+            </ul>
+        </div>
+
+        <div id="hNav">
+            <ul id="hNavUl" style="list-style-type:none"> 
+                <li><a href="/admin"><button class="hNavBnt">Website Info</button></a></li>
+                 <li><a href="#"><button class="hSelectBnt">User Control<div class="arrow"></div></button></a></li>
+                 <li><a href="/admin-map"><button class="hNavBnt">Area Control</button></a></li>
+                 <li><a href="/admin-res"><button class="hNavBnt">Reservations</button></a></li>
+            </ul>
+        </div>
+
+        <div id="infoPanel">
+            <p style="top:6px;left:50px">User Type:</p>
+            <select id="searchType" style="left:50px;top:30px">
+                <option value="0">All</option>
+                <option value="1">Admin</option>
+                <option value="2">Customer</option>
+                <option value="3">Driver</option>
+            </select>
+            <input type="text" id="nameToFind" placeholder="Username" style="left:140px;top:30px">
+            <button onclick="getUserResult()" style="position:absolute;top:32px;left:280px">Check</button> 
+            <button class="submitBnt" onclick="window.location.reload()" style="top:535px;right:15px">Reset</button>
+            <button class="submitBnt" onclick="updateResult()" style="top:535px;right:265px">Update</button>
+            <button class="submitBnt" onclick="deleteResult()" style="top:535px;right:140px">Delete</button>
+
+            <div id="resultPanel">
+                <p style="top:30px;left:600px">User ID: <b id='IDfield' style="top:0px;left:90px"></b></p>
+                <select id="resultList" size="23" onchange="selectUser()">
+                </select>
+                <p style="top:80px;left:430px">Username: <input type="text" id="username" style="width:130px"></p>
+                <p style="top:80px;left:700px">Password: <input type="password" id="password" style="width:130px"></p>
+                <p style="top:120px;left:430px">First Name: <input type="text" id="fname" style="width:130px"></p>
+                <p style="top:120px;left:700px">Last Name: <input type="text" id="lname" style="width:130px"></p>
+                <p style="top:160px;left:430px">E-mail: <input type="email" id="email" style="width:400px"></p>
+                <p style="top:200px;left:430px">Phone #: <input type="tel" id="phoneNum" style="width:130px"></p>
+                <p style="top:200px;left:700px">User Type:
+                        <select style="top:0px;left:95px;width:140px;" id="userType">
+                            <option value="1">Admin</option>
+                            <option value="2">Customer</option>
+                            <option value="3">Driver</option>
+                        </select>
+                </p>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+<script>
+
+            var userList;
+            var _xsrf = getCookie("_xsrf");
+
+            function getCookie(name) {
+                var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+                return r ? r[1] : undefined;
+            }
+
+            function getUserResult(){
+                var userName = document.getElementById("nameToFind").value;
+                var searchType = document.getElementById("searchType").options[document.getElementById("searchType").options.selectedIndex].value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        var select = document.getElementById("resultList");
+                        select.options.length = 0;
+                        userList = JSON.parse(xhttp.responseText);
+                        for (var i = 1;i<= Object.keys(userList).length;i++){
+                            var getName = document.createElement("option");
+                            getName.value = i.toString();
+                            getName.text = userList[i.toString()]["un"];
+                            select.appendChild(getName);
+                        }
+                    }
+                };
+                xhttp.open("post", "admin-user", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=getResult&userName=" + userName + "&searchType=" + searchType);
+            }
+
+            function updateResult(){
+                var xhttp = new XMLHttpRequest();
+                var userID = document.getElementById("IDfield").innerHTML;
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                var firstname = document.getElementById("fname").value;
+                var lastname = document.getElementById("lname").value;
+                var email = document.getElementById("email").value;
+                var phone = document.getElementById("phoneNum").value;
+                var userType = document.getElementById("userType").options[document.getElementById("userType").options.selectedIndex].value;
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == 'ok'){
+                            window.location.reload();
+                            alert("User Info Updated!");
+                        }        
+                    }
+                };
+                xhttp.open("post", "admin-user", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=updateResult&uID=" + userID + "&userName=" + username + "&pw=" + password + "&fname=" + firstname + "&lname=" + lastname + "&email=" + email + "&phone=" + phone + "&userType=" + userType);
+            }
+
+            function deleteResult(){
+                var xhttp = new XMLHttpRequest();
+                var userID = document.getElementById("IDfield").innerHTML;
+                var username = document.getElementById("username").value;
+
+                var userType = document.getElementById("userType").options[document.getElementById("userType").options.selectedIndex].value;
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == 'ok'){
+                            window.location.reload();
+                            alert("User Deleted!");
+                        }        
+                    }
+                };
+                if (confirm("Click YES to delete username " + username)){
+                    xhttp.open("post", "admin-user", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send('_xsrf=' + _xsrf + "&postType=deleteResult&uID=" + userID);
+                }
+
+            }
+
+            function selectUser(){
+                var selected = Number(document.getElementById("resultList").options.selectedIndex) + 1;
+                var getUser = userList[selected];
+                document.getElementById("IDfield").innerHTML = getUser['id'];
+                document.getElementById("username").value = getUser["un"];
+                document.getElementById("password").value = getUser["pw"];
+                document.getElementById("fname").value = getUser["FIRSTNAME"];
+                document.getElementById("lname").value = getUser["LASTNAME"];
+                document.getElementById("email").value = getUser["email"];
+                document.getElementById("phoneNum").value = getUser["phone"];
+                if (getUser["TYPE"] == "1"){
+                    document.getElementById("userType").options.selectedIndex = 0;
+                 }else if (getUser["TYPE"] == "2"){
+                    document.getElementById("userType").options.selectedIndex = 1;
+                }else if (getUser["TYPE"] == "3"){
+                    document.getElementById("userType").options.selectedIndex = 2;
+                }
+            }
+
+            function getUser(){
+                var accountField = document.getElementById("accountField");
+                var status = "{{status}}";
+                if (status == "ok"){
+                    var username = "{{userName}}";
+                    accountField.innerHTML = "Welcome " + username + "    |    <a href='/'><img src='/static/img/homepage.png' style='width:18px;height:18px'></a>    |    <a href='/cp'><img src='/static/img/cp.ico' style='width:18px;height:18px'></a>     |    <a href='/logout'><img src='/static/img/logout.png' style='width:18px;height:18px'></a>";
+                }else{
+                    alert(status);
+                }
+            }
+
+            function divsGetWH(){
+                var uNav = document.getElementById("uNav");
+                var uNavTop = Number(uNav.offsetTop);
+                var uNavLeft = Number(uNav.offsetLeft);
+                var hNav = document.getElementById("hNav");
+                var caledLeft = uNavLeft + 180;
+                var caledTop = uNavTop + 4;
+                hNav.style.top = caledTop.toString() + "px";
+                hNav.style.left = caledLeft.toString() + "px";
+                
+                var infoPanel = document.getElementById("infoPanel");
+                caledTop +=50;
+                infoPanel.style.left = caledLeft.toString() + "px";
+                infoPanel.style.top = caledTop.toString() + "px";
+
+            }
+            
+            function adminPage(){
+                userType = "{{userType}}"
+                var adminBnt = document.getElementById("admin");
+                if (userType = "1"){
+                    adminBnt.style.display = "block";
+                }
+            }
+            
+            
+</script>
+</body>
+</html>

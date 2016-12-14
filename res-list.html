@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Limo System Control Panel</title>
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+    body{
+        margin:0px;
+        padding:0px;
+        font-family:"Montserrat", sans-serif;
+    }
+
+    html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td{
+        margin: 0;
+        padding: 0;
+    }
+
+    a{  
+        color:white;
+        text-decoration: none;
+    }
+
+    #accountField{
+        position:absolute;
+        right:20px;
+        top:10px;
+        color: #F7F7F7;
+    }
+
+    .bnt{
+        background-color: white;
+        border: none;
+        color: indianred;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }  
+
+    .selecctBnt{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    .bnt:hover{
+        background-color: indianred;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 140px;
+    }
+
+    #topMenu{
+        width: 100%;
+        background-color: gray;
+        line-height: 30px;
+        height: 50px;
+    }
+    body{
+        margin:0px;
+        padding:0px;
+    }
+
+    #uNav{        
+        width: 50px;
+        padding-left: 0px;
+    }
+
+    #hNav{
+        position: absolute;
+        width: 700px;
+        height: 35px;
+        line-height: 32px;
+        margin-right: 5px;
+    }
+
+    ul#hNavUl li {
+        display: inline;
+    }
+
+    .mainBody{
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    .f1{
+        width: 210px;
+        height: 50px;
+        font-size: 30px;
+        color: #555;
+        text-align: center;
+    }
+
+    .hNavBnt{  
+        border: none;
+        background:white;
+        color: #ff8f2b;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+
+    }
+    .hNavBnt:hover{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .u_header{
+        height:50px;
+        margin-bottom: 20px;
+        border-bottom: 2px #ebebeb solid;
+    }
+
+    .hSelectBnt{
+        border: none;
+        background:#ff8f2b;
+        color: white;
+        display: inline-block;
+        width: 110px;
+        height: 35px;
+        text-align: center;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .arrow{
+        position: absolute;
+        top: 30px;
+        left: 170px;
+        border-color: #fff transparent transparent;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px;
+    }
+
+    #infoPanel{
+        position: absolute;
+        width: 1030px;
+        height: 500px;
+        background-color: #f5f5f5;
+        
+    }
+
+    #infoPanel p{
+        position: absolute;
+    }
+
+    #infoPanel input{
+        padding-left:5px;
+        position: absolute;
+        width: 160px;
+        height: 22px;
+    }
+
+    #infoPanel b{
+        position: absolute;
+    }
+
+    #infoPanel img{
+        position: absolute;
+        height: 15px;
+        width: 15px;
+    }
+
+    #infoPanel p{
+        position:absolute;
+        top:475px;
+        right:40px;
+        font-size:12px;
+    }
+
+    #resTable tr{
+        text-align:center;
+        height:30px;
+    }
+
+    #bot1{
+        position:relative;
+        top:259px;
+        width:100%;
+        background-color: rgb(231, 76, 60);
+        height:90px;
+        text-align:center;
+    }
+    #bot1 h1{
+        position:absolute;
+        color:white;
+        top:23px;
+    }
+
+    #bot2{
+        top:257px;
+        position:relative;
+        width:100%;
+        background-color: #363434;  
+        height:230px;
+    }
+
+    #bot3{
+        position:relative;
+        top:249px;
+        width:100%;
+        background-color: black;  
+        height:50px;
+    }
+
+    #bot3 h5{
+        position:relative;
+        padding-top:20px;
+        margin-top:-5px;
+        margin-bottom:-5px;
+        color:#A6A5A5;
+    }
+
+    #bot3 a{
+        color:#A6A5A5;
+    }
+
+    #bot3 a:hover{
+        color: rgb(231, 76, 60);
+    }
+
+
+</style>
+
+<body onload="divsGetWH();getUser();userTypePage()">
+    <div id="topMenu"><div id="accountField"></div></div>
+    <div class="mainBody">
+        <div class="u_header">
+            <h1 class="f1">Control Panel</h1>
+        </div>
+        <div id="uNav">
+            <ul style="list-style-type:none"> 
+                <li><a href="/cp"><button class="bnt">Profile</button></a><hr width="140" align="left"></li>
+                <li><a href="http://www.google.com"><button class="bnt">Messages</button></a><hr width="140" align="left"></li>
+                <li><a href="#"><button class="selecctBnt">Reservations</button></a><hr width="140" align="left"></li>
+                <li id="admin" style="display:none"><a href="/admin"><button class="bnt" >ADMIN</button></a><hr width="140" align="left"></li>
+                <li id="driver" style="display:none"><a href="/driver"><button class="bnt" >DRIVER</button></a><hr width="140" align="left"></li>
+            </ul>
+        </div>
+
+        <div id="hNav">
+            <ul id="hNavUl" style="list-style-type:none"> 
+                 <li><a href="/cp"><button class="hSelectBnt">Reservation List</button><div class="arrow"></div></a></li>
+            </ul>
+        </div>
+
+        <div id="infoPanel">
+            
+            <table id="resTable" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+			<tbody><tr>
+				<td bgcolor="#ffffff">Order ID</td>
+				<td bgcolor="#ffffff">PickUp Date</td>
+                <td bgcolor="#ffffff">PickUp Time</td>
+				<td bgcolor="#ffffff">Order Fare</td>
+				<td bgcolor="#ffffff">Order Status</td>
+				<td bgcolor="#ffffff">Driver #</td>
+			</tr>
+			</tbody></table>
+
+            <p id="nxtPageField"></p>
+
+        </div>
+
+    </div>
+    <div id="bot1"><img id= "bot2Ico" src="static/img/botH.png" width="60px" height="60px" style="position:absolute;top:15px;"><h1 id="bot1h1">Need Any Help? CALL NOW! +1 800 666 6666</h1></div>
+    <div id="bot2">
+        <span id="botLogo" style="position:absolute;top:50px;"><img src="static/img/logo.png" height="80px" width="80px" ></span>
+        <span id="botSign" style="text-align:left;position:absolute;top:63px;"><a href="#"><b style="font-size:40px;">Li<b style="color:red">mo</b></b><br><b>Limo Service</b></a></span>
+    </div>
+    <div id="bot3">
+        <h5 id="bot3H">Copyright 2016 © Limo Service. All rights reserved. Terms of use | <a href="#">Privacy Policy</a></h5>
+    </div>
+
+<script>
+
+
+            var username = "{{userName}}";
+            var _xsrf = getCookie("_xsrf");
+            var userOrders;
+
+            function getCookie(name) {
+                var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+                return r ? r[1] : undefined;
+            }
+
+            function getResList(){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        userOrders = JSON.parse(xhttp.responseText);
+                        printResList(userOrders);
+                        nextPageField(userOrders);
+                    }
+                };
+                xhttp.open("post", "cp-rl", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send('_xsrf=' + _xsrf + "&postType=getResList&un=" + username);
+            }
+
+            function printResList(res){
+
+                var resTable = document.getElementById("resTable");
+
+                for (var i = 1;i <= Object.keys(res).length;i++){
+                    var newRow = resTable.insertRow(-1);
+                    var oID = res[i.toString()]["ID"];
+                    var link = "/cp-rd?resid=" + oID
+                    newRow.insertCell(0).innerHTML = oID + " <a style='color:green' href='" + link + "'> [DETAIL]</a>";
+                    newRow.insertCell(1).innerHTML = res[i.toString()]["DATE"].slice(4,6) + "-" + res[i.toString()]["DATE"].slice(6,8) + "-" + res[i.toString()]["DATE"].slice(0,4);
+                    newRow.insertCell(2).innerHTML = res[i.toString()]["TIME"].slice(0,2) + ":" + res[i.toString()]["TIME"].slice(2,4);
+                    newRow.insertCell(3).innerHTML = "$" + res[i.toString()]["FARE"];
+
+                    if (res[i.toString()]["STATUS"] == "P"){
+                        newRow.insertCell(4).innerHTML = "Processing";
+                    } else if (res[i.toString()]["STATUS"] == "C"){
+                        newRow.insertCell(4).innerHTML = "Confirmed";
+                    } else if (res[i.toString()]["STATUS"] == "D"){
+                        newRow.insertCell(4).innerHTML = "Deleted";
+                    }
+
+                    if (res[i.toString()]["CARNUM"] == "0"){
+                        newRow.insertCell(5).innerHTML = "Waiting";
+                    }else{
+                        newRow.insertCell(5).innerHTML = res[i.toString()]["CARNUM"];
+                    }
+                }
+                
+
+            }
+
+            function nextPageField(res){
+                var nxtPage = document.getElementById("nxtPageField");
+                resNum = "Total " +  (Object.keys(res).length).toString() + " Reservations, ";
+                nxtPage.innerHTML = resNum;
+            }
+
+
+            function getUser(){
+                var accountField = document.getElementById("accountField");
+                var status = "{{status}}";
+                if (status == "ok"){
+                    var username = "{{userName}}";
+                    accountField.innerHTML = "Welcome " + username + "    |    <a href='/'><img src='/static/img/homepage.png' style='width:18px;height:18px'></a>    |    <a href='/cp'><img src='/static/img/cp.ico' style='width:18px;height:18px'></a>     |    <a href='/logout'><img src='/static/img/logout.png' style='width:18px;height:18px'></a>";
+                }else{
+                    alert(status);
+                }
+            }
+
+            function divsGetWH(){
+                var uNav = document.getElementById("uNav");
+                var uNavTop = Number(uNav.offsetTop);
+                var uNavLeft = Number(uNav.offsetLeft);
+                var hNav = document.getElementById("hNav");
+                var caledLeft = uNavLeft + 180;
+                var caledTop = uNavTop + 4;
+                var botH1 = document.getElementById("bot1h1");
+                var bot2Ico = document.getElementById("bot2Ico");
+                var botLogo = document.getElementById("botLogo");
+                var botSign = document.getElementById("botSign");
+                var botH5 = document.getElementById("bot3H");
+                hNav.style.top = caledTop.toString() + "px";
+                hNav.style.left = caledLeft.toString() + "px";
+                
+                var infoPanel = document.getElementById("infoPanel");
+                caledTop +=50;
+                botH1.style.left = (caledLeft + 105).toString() + "px";
+                bot2Ico.style.left = (caledLeft + 20).toString() + "px";
+                infoPanel.style.left = caledLeft.toString() + "px";
+                infoPanel.style.top = caledTop.toString() + "px";
+                botH5.style.paddingLeft = (caledLeft + 15).toString() + "px";
+                botLogo.style.left = (caledLeft + 10) + "px";
+                botSign.style.left = (caledLeft + 110).toString() + "px";
+                getResList();
+              }
+            
+            function userTypePage(){
+                userType = "{{userType}}"
+                if (userType == "1"){
+                    document.getElementById("admin").style.display = "block";
+                }else if (userType == "3"){
+                    document.getElementById("driver").style.display = "block";
+                }
+            }
+            
+            
+</script>
+</body>
+</head>
+</html>
