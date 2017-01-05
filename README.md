@@ -10,6 +10,10 @@
 7. Allows dispatcher to generate/download database report as csv file.
 
 # Languages Involved:
-1.Frontend: HTML/CSS/Javascript/Googlemap Api
-2.Backend: Python/Tornado/Pymysql   
-3.Database: MYSQL   
+Frontend: HTML/CSS/Javascript/Googlemap Api
+
+
+Backend: Python/Tornado/Pymysql
+
+
+Database: MYSQL   
